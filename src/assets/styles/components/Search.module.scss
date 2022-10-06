@@ -1,0 +1,45 @@
+.container {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 1rem 0.5rem;
+  overflow: hidden;
+}
+
+.icon {
+  align-items: center;
+  background-color: #383838;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+
+  svg {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background-color: #232323;
+  }
+}
+
+.bar {
+  box-sizing: border-box;
+  width: 100%;
+
+  input {
+    background-color: #4f4f4f;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    height: 40px;
+    padding: 0 0.6rem;
+    width: 100%;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.75);
+    }
+  }
+}
