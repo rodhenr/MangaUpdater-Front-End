@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styles from "../../assets/styles/layouts/Main.module.scss";
 
 interface Data {
@@ -16,115 +18,40 @@ interface Data {
 }
 
 export function Index() {
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
+  const [data, setData] = useState<Data[]>([]);
+  const tokenTest =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjUxNzgzMTMsImV4cCI6MTY2NTE4MTkxM30.IiIS4HF9RW27USqCMAP1JTs7ZpbsbhjU0XJz7tkeokk";
 
-  const lastWeek = new Date(today);
-  lastWeek.setDate(lastWeek.getDate() - 8);
+  useEffect(() => {
+    const getMangas = async () => {
+      const mangaData: Data[] = await axios({
+        method: "GET",
+        url: "http://localhost:8080/api/manga",
+        headers: {
+          authorization: `Bearer ${tokenTest}`,
+          "Access-Control-Allow-Origin": "*",
+        },
+      }).then((i) => i.data);
 
-  const arrayTest: Data[] = [
-    {
-      image: "https://cdn.mangaupdates.com/image/i389561.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: new Date(),
-      },
-    },
-    {
-      image: "https://cdn.mangaupdates.com/image/i389561.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: new Date(),
-      },
-    },
-    {
-      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: yesterday,
-      },
-    },
-    {
-      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: yesterday,
-      },
-    },
-    {
-      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: yesterday,
-      },
-    },
-    {
-      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
-      name: "Overlord",
-      author: "Autor",
-      sources: {
-        mangaId: "123456",
-        chapter: "123",
-        id: "1234",
-        linkId: "abcd123",
-        lastChapter: "123",
-        scan: "teste",
-        date: lastWeek,
-      },
-    },
-  ];
+      setData(mangaData);
+    };
+
+    getMangas();
+  }, [tokenTest]);
 
   const checkDate = (date: Date) => {
     const today = new Date();
-    const tDate = `${today.getUTCDate()}/${
-      today.getUTCMonth() + 1
-    }/${today.getUTCFullYear()}`;
+    const tDate = `${today.getDate}/${
+      today.getMonth() + 1
+    }/${today.getFullYear()}`;
 
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-    const yDate = `${yesterday.getUTCDate()}/${
-      yesterday.getUTCMonth() + 1
-    }/${yesterday.getUTCFullYear()}`;
+    const yDate = `${yesterday.getDate()}/${
+      yesterday.getMonth() + 1
+    }/${yesterday.getFullYear()}`;
 
-    const dDate = `${date.getUTCDate()}/${
-      date.getUTCMonth() + 1
-    }/${date.getUTCFullYear()}`;
+    const dDate = `${date.getDate}/${date.getMonth}+ 1/${date.getFullYear}`;
 
     if (dDate === tDate) {
       return "Hoje";
@@ -135,12 +62,12 @@ export function Index() {
     }
   };
 
-  return (
+  return data.length > 0 ? (
     <div className={styles.container}>
-      {arrayTest.map((i, index) => {
+      {data.map((i, index) => {
         let last = "";
         const check = checkDate(i.sources.date);
-        if (index > 0) last = checkDate(arrayTest[index - 1].sources.date);
+        if (index > 0) last = checkDate(data[index - 1].sources.date);
 
         return (
           <div className={styles.container_chapter} key={index}>
@@ -159,5 +86,7 @@ export function Index() {
         );
       })}
     </div>
+  ) : (
+    <div>Carregando...</div>
   );
 }
