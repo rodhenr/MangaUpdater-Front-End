@@ -39,7 +39,21 @@ export function Index() {
       },
     },
     {
-      image: "",
+      image: "https://cdn.mangaupdates.com/image/i389561.jpg",
+      name: "Overlord",
+      author: "Autor",
+      sources: {
+        mangaId: "123456",
+        chapter: "123",
+        id: "1234",
+        linkId: "abcd123",
+        lastChapter: "123",
+        scan: "teste",
+        date: new Date(),
+      },
+    },
+    {
+      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
       name: "Overlord",
       author: "Autor",
       sources: {
@@ -53,7 +67,35 @@ export function Index() {
       },
     },
     {
-      image: "",
+      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
+      name: "Overlord",
+      author: "Autor",
+      sources: {
+        mangaId: "123456",
+        chapter: "123",
+        id: "1234",
+        linkId: "abcd123",
+        lastChapter: "123",
+        scan: "teste",
+        date: yesterday,
+      },
+    },
+    {
+      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
+      name: "Overlord",
+      author: "Autor",
+      sources: {
+        mangaId: "123456",
+        chapter: "123",
+        id: "1234",
+        linkId: "abcd123",
+        lastChapter: "123",
+        scan: "teste",
+        date: yesterday,
+      },
+    },
+    {
+      image: "https://cdn.mangaupdates.com/image/i352053.jpg",
       name: "Overlord",
       author: "Autor",
       sources: {
@@ -106,6 +148,7 @@ export function Index() {
               <p className={styles.check}>{check}</p>
             ) : null}
             <div className={styles.chapter}>
+              <img src={i.image} alt="manga_image" />
               <p>{i.name}</p>
               <div className={styles.chapter_info}>
                 <p>Capítulo: {i.sources.lastChapter}</p>
