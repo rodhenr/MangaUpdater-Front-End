@@ -1,10 +1,11 @@
 .container {
   background: url("../../images/header-image.jpg") center 10%;
   background-size: cover;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  height: 130px;
+  height: 140px;
   justify-content: space-between;
   padding: 0.5rem 1rem;
   opacity: 0.5;
