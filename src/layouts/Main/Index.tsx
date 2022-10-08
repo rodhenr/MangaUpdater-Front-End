@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import type { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import MainSearch from "../../components/MainSearch";
 import styles from "../../assets/styles/layouts/Main.module.scss";
 
 interface Data {
@@ -18,9 +21,10 @@ interface Data {
 }
 
 export function Index() {
+  const searchItem = useSelector((state: RootState) => state.search.item);
   const [data, setData] = useState<Data[]>([]);
   const tokenTest =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjUxNzgzMTMsImV4cCI6MTY2NTE4MTkxM30.IiIS4HF9RW27USqCMAP1JTs7ZpbsbhjU0XJz7tkeokk";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjUyNjEzNDIsImV4cCI6MTY2NTI2NDk0Mn0.XiAdUX54I6LfjtAJataa_6EhO0OWXPCSg3QJH8QeeRI";
 
   useEffect(() => {
     const getMangas = async () => {
@@ -41,17 +45,24 @@ export function Index() {
 
   const checkDate = (date: Date) => {
     const today = new Date();
-    const tDate = `${today.getDate}/${
-      today.getMonth() + 1
-    }/${today.getFullYear()}`;
-
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-    const yDate = `${yesterday.getDate()}/${
-      yesterday.getMonth() + 1
-    }/${yesterday.getFullYear()}`;
 
-    const dDate = `${date.getDate}/${date.getMonth}+ 1/${date.getFullYear}`;
+    const to2Digits = (num: number) => {
+      return num.toString().padStart(2, "0");
+    };
+
+    const formatDate = (d: Date) => {
+      return [
+        to2Digits(d.getDate()),
+        to2Digits(d.getMonth() + 1),
+        d.getFullYear(),
+      ].join("/");
+    };
+
+    const tDate = formatDate(today);
+    const yDate = formatDate(yesterday);
+    const dDate = formatDate(new Date(date));
 
     if (dDate === tDate) {
       return "Hoje";
@@ -62,7 +73,11 @@ export function Index() {
     }
   };
 
-  return data.length > 0 ? (
+  return searchItem !== "" ? (
+    <div>
+      <MainSearch />
+    </div>
+  ) : data.length > 0 ? (
     <div className={styles.container}>
       {data.map((i, index) => {
         let last = "";

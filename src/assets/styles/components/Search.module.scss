@@ -1,7 +1,8 @@
 .container {
   align-items: center;
   box-sizing: border-box;
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px 1fr;
   font-family: "Roboto Condensed", sans-serif;
   margin: 0.2rem 0.5rem;
   overflow: hidden;
@@ -14,7 +15,6 @@
   display: flex;
   height: 40px;
   justify-content: center;
-  width: 40px;
 
   svg {
     color: rgba(255, 255, 255, 0.75);
@@ -27,12 +27,12 @@
 }
 
 .bar {
-  box-sizing: border-box;
   width: 100%;
 
   input {
     background-color: #4f4f4f;
     border: none;
+    box-sizing: border-box;
     color: rgba(255, 255, 255, 0.75);
     height: 40px;
     padding: 0 0.6rem;
