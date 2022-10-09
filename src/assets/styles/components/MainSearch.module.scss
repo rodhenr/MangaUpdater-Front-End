@@ -1,0 +1,37 @@
+$width: calc((100vw - 1rem) / 3);
+
+.container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, $width);
+  grid-template-rows: repeat(auto-fill, 180px);
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 0.5rem 0.5rem;
+}
+
+.chapter_container {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    height: 150px;
+    width: 110px;
+  }
+
+  p {
+    color: #fff;
+    font-size: 0.8rem;
+    margin: 0.2rem 0 0;
+  }
+
+  &:nth-child(3n + 1) {
+    justify-self: flex-start;
+  }
+
+  &:nth-child(3n + 3) {
+    justify-self: flex-end;
+  }
+}
