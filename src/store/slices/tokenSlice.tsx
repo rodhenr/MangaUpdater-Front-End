@@ -7,7 +7,7 @@ interface Data {
 
 const initialState: Data = {
   token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjUzNDc4MTIsImV4cCI6MTY2NTM1MTQxMn0.W_PZCn9vgflezliGfYqGdTFtmDIG4eITkj2GYUR6x1c",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjU0NDg5MTUsImV4cCI6MTY2NTQ1MjUxNX0.dDroPderh9vb12h9j9Hwq1qOop1xjbNUsg_DwEsqU9c",
 };
 
 export const tokenSlice = createSlice({

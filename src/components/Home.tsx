@@ -54,7 +54,7 @@ export default function Home() {
 
   return data.length > 0 ? (
     <div className={styles.container}>
-      {modalOpen ? <Modal /> : ""}
+      {modalOpen && <Modal />}
       {data.map((i, index) => {
         let last = "";
         const check = checkDate(i.sources.date);
@@ -81,6 +81,6 @@ export default function Home() {
       })}
     </div>
   ) : (
-    <div>Carregando...</div>
+    <div className={styles.loading}>Carregando...</div>
   );
 }

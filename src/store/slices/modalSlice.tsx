@@ -10,6 +10,7 @@ export interface Sources {
 }
 
 export interface DataModal {
+  id: string;
   image: string;
   name: string;
   author: string;
@@ -27,6 +28,7 @@ const initialState: InitialState = {
   open: false,
   mangaId: "",
   data: {
+    id: "",
     image: "",
     name: "",
     author: "",

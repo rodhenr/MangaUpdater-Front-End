@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSearchData } from "../store/slices/searchSlice";
 import { checkName } from "../utils/nameCheck";
 import styles from "../assets/styles/components/MainSearch.module.scss";
+import { changeState, setMangaId } from "../store/slices/modalSlice";
+import Modal from "./Modal";
 
 interface Source {
   id: string;
@@ -26,6 +28,7 @@ export default function MainSearch() {
   const token = useSelector((state: RootState) => state.token.token);
   const searchItem = useSelector((state: RootState) => state.search.item);
   const data = useSelector((state: RootState) => state.search.data);
+  const modalOpen = useSelector((state: RootState) => state.modal.open);
 
   useEffect(() => {
     const mangaData = async () => {
@@ -44,16 +47,26 @@ export default function MainSearch() {
     mangaData();
   }, [searchItem]);
 
+  const openModal = (mangaId: string) => {
+    dispatch(setMangaId(mangaId));
+    dispatch(changeState());
+  };
+
   return data.length > 0 ? (
     <div className={styles.container}>
+      {modalOpen && <Modal />}
       {data.map((i) => (
-        <div key={i.id} className={styles.chapter_container}>
+        <div
+          key={i.id}
+          className={styles.chapter_container}
+          onClick={() => openModal(i.id)}
+        >
           <img src={i.image} alt={i.name} />
           <p>{checkName(i.name, 21)}</p>
         </div>
       ))}
     </div>
   ) : (
-    <div>Carregando...</div>
+    <div className={styles.loading}>Carregando...</div>
   );
 }

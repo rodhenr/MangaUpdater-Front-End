@@ -19,6 +19,10 @@ export function Search() {
     setItem("");
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSubmit();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.icon} onClick={() => handleSubmit()}>
@@ -30,6 +34,7 @@ export function Search() {
           placeholder="Pesquise por um mangá (minimo 3 caracteres)"
           value={item}
           onChange={(e) => handleInput(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
       </div>
     </div>
