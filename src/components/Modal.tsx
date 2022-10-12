@@ -15,7 +15,6 @@ function Modal() {
 
   useEffect(() => {
     const getMangas = async () => {
-      console.log(mangaId);
       const mangaData: DataModal = await axios({
         method: "GET",
         url: `http://localhost:8080/api/manga/modal?mangaId=${mangaId}`,

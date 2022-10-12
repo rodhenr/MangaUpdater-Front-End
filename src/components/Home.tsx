@@ -2,10 +2,15 @@ import axios from "axios";
 import { useEffect } from "react";
 import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { addData } from "../store/slices/homeData";
+import { addData, addHomeErr } from "../store/slices/homeData";
 import { checkDate } from "../utils/dateCheck";
 import Modal from "./Modal";
 import { checkName } from "../utils/nameCheck";
+import {
+  addErr,
+  addSearchData,
+  changeSearch,
+} from "../store/slices/searchSlice";
 import { changeState, setMangaId } from "../store/slices/modalSlice";
 import styles from "../assets/styles/components/Home.module.scss";
 
@@ -29,6 +34,7 @@ export default function Home() {
   const token = useSelector((state: RootState) => state.token.token);
   const data = useSelector((state: RootState) => state.homeData.data);
   const modalOpen = useSelector((state: RootState) => state.modal.open);
+  const homeErr = useSelector((state: RootState) => state.homeData.err);
 
   useEffect(() => {
     const getMangas = async () => {
@@ -41,10 +47,24 @@ export default function Home() {
         },
       }).then((i) => i.data);
 
+      if (mangaData.length === 0) {
+        dispatch(addData(mangaData));
+        dispatch(addHomeErr("Sem itens para exibir"));
+      } else {
+        dispatch(addData(mangaData));
+        dispatch(addHomeErr(""));
+      }
+
       dispatch(addData(mangaData));
     };
 
     getMangas();
+  }, []);
+
+  useEffect(() => {
+    dispatch(addSearchData([]));
+    dispatch(changeSearch(""));
+    dispatch(addErr(""));
   }, []);
 
   const openModal = (mangaId: string) => {
@@ -52,7 +72,7 @@ export default function Home() {
     dispatch(changeState());
   };
 
-  return data.length > 0 ? (
+  return data.length > 0 && homeErr === "" ? (
     <div className={styles.container}>
       {modalOpen && <Modal />}
       {data.map((i, index) => {
@@ -80,7 +100,13 @@ export default function Home() {
         );
       })}
     </div>
+  ) : homeErr !== "" ? (
+    <div className={styles.err}>
+      <p>{homeErr}</p>
+    </div>
   ) : (
-    <div className={styles.loading}>Carregando...</div>
+    <div className={styles.loading}>
+      <p>Carregando...</p>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { addSearchData } from "../store/slices/searchSlice";
+import { addErr, addSearchData } from "../store/slices/searchSlice";
 import { checkName } from "../utils/nameCheck";
 import styles from "../assets/styles/components/MainSearch.module.scss";
 import { changeState, setMangaId } from "../store/slices/modalSlice";
@@ -29,6 +29,7 @@ export default function MainSearch() {
   const searchItem = useSelector((state: RootState) => state.search.item);
   const data = useSelector((state: RootState) => state.search.data);
   const modalOpen = useSelector((state: RootState) => state.modal.open);
+  const err = useSelector((state: RootState) => state.search.err);
 
   useEffect(() => {
     const mangaData = async () => {
@@ -41,7 +42,13 @@ export default function MainSearch() {
         },
       }).then((i) => i.data);
 
-      dispatch(addSearchData(mangaData));
+      if (mangaData.length === 0) {
+        dispatch(addSearchData(mangaData));
+        dispatch(addErr("Nenhum resultado encontrado"));
+      } else {
+        dispatch(addSearchData(mangaData));
+        dispatch(addErr(""));
+      }
     };
 
     mangaData();
@@ -52,7 +59,7 @@ export default function MainSearch() {
     dispatch(changeState());
   };
 
-  return data.length > 0 ? (
+  return data.length > 0 && err === "" ? (
     <div className={styles.container}>
       {modalOpen && <Modal />}
       {data.map((i) => (
@@ -66,7 +73,13 @@ export default function MainSearch() {
         </div>
       ))}
     </div>
+  ) : err !== "" ? (
+    <div className={styles.err}>
+      <p>{err}</p>
+    </div>
   ) : (
-    <div className={styles.loading}>Carregando...</div>
+    <div className={styles.loading}>
+      <p>Carregando...</p>
+    </div>
   );
 }

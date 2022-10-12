@@ -47,10 +47,17 @@
   margin: 0.8rem 0 0.5rem;
 }
 
-.loading {
+.loading,
+.err {
   align-items: center;
   color: #fff;
   display: flex;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 2rem;
   justify-content: center;
+}
+
+.err {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.6rem;
 }

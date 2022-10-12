@@ -19,11 +19,13 @@ interface Data {
 export interface searchState {
   item: string;
   data: Data[];
+  err: string;
 }
 
 const initialState: searchState = {
   item: "",
   data: [],
+  err: "",
 };
 
 export const searchSlice = createSlice({
@@ -36,10 +38,13 @@ export const searchSlice = createSlice({
     addSearchData: (state, action) => {
       state.data = action.payload;
     },
+    addErr: (state, action) => {
+      state.err = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addSearchData, changeSearch } = searchSlice.actions;
+export const { addErr, addSearchData, changeSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;
