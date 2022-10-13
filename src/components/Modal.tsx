@@ -9,7 +9,7 @@ import styles from "../assets/styles/components/Modal.module.scss";
 function Modal() {
   const dispatch = useDispatch();
   const modalOpen = useSelector((state: RootState) => state.modal.open);
-  const token = useSelector((state: RootState) => state.token.token);
+  const token = useSelector((state: RootState) => state.auth.token);
   const mangaId = useSelector((state: RootState) => state.modal.mangaId);
   const data = useSelector((state: RootState) => state.modal.data);
 

@@ -1,15 +1,25 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import searchReducer from "./slices/searchSlice";
-import homeDataReducer from "./slices/homeData";
+import homeDataReducer from "./slices/homeDataSlice";
 import modalReducer from "./slices/modalSlice";
-import tokenReducer from "./slices/tokenSlice";
-import { persistReducer, persistStore } from "redux-persist";
+import authReducer from "./slices/authSlice";
+import { apiSlice } from "./api/apiSlice";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  persistStore,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
+  [apiSlice.reducerPath]: apiSlice.reducer,
   search: searchReducer,
-  token: tokenReducer,
+  auth: authReducer,
   homeData: homeDataReducer,
   modal: modalReducer,
 });
@@ -18,14 +28,19 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["search", "token"],
+  whitelist: ["search", "auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunk],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(apiSlice.middleware),
 });
 
 export const persistor = persistStore(store);
