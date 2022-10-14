@@ -8,7 +8,7 @@ interface Data {
 
 const initialState: Data = {
   token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjU3MDA5NjIsImV4cCI6MTY2NTcwNDU2Mn0.K3h71aFgQw5vg-X6p5Uc82Yg9Hx7UVOoxxkihuyxDPg",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjU3MTM3NjEsImV4cCI6MTY2NTcxNzM2MX0.Ov5QxoZ5Yt3oHW3LEhmVSVNcHGqa2jE1quWlgeSNsBM",
   user: "",
 };
 

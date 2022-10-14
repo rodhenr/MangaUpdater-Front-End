@@ -1,80 +1,91 @@
-import axios from "axios";
 import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { changeState, DataModal } from "../store/slices/modalSlice";
-import { addData } from "../store/slices/modalSlice";
+import { changeState, setMangaId } from "../store/slices/modalSlice";
+import { addModalData } from "../store/slices/modalSlice";
+import {
+  useGetModalMangaQuery,
+  useFollowNewMangaMutation,
+  useChangeFollowMutation,
+  useDeleteFollowMutation,
+} from "../store/api/modalApiSlice";
 import styles from "../assets/styles/components/Modal.module.scss";
 
-function Modal() {
+export default function Modal() {
   const dispatch = useDispatch();
-  const modalOpen = useSelector((state: RootState) => state.modal.open);
-  const token = useSelector((state: RootState) => state.auth.token);
   const mangaId = useSelector((state: RootState) => state.modal.mangaId);
-  const data = useSelector((state: RootState) => state.modal.data);
+  const modalData = useSelector((state: RootState) => state.modal.data);
+  const { data, isSuccess } = useGetModalMangaQuery(mangaId);
+  const [triggerNewFollow] = useFollowNewMangaMutation();
+  const [triggerChangeFollow] = useChangeFollowMutation();
+  const [triggerDeleteFollow] = useDeleteFollowMutation();
 
   useEffect(() => {
-    const getMangas = async () => {
-      const mangaData: DataModal = await axios({
-        method: "GET",
-        url: `http://localhost:8080/api/manga/modal?mangaId=${mangaId}`,
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*",
-        },
-      }).then((i) => i.data.data);
-
-      dispatch(addData(mangaData));
-    };
-
-    getMangas();
-  }, []);
+    if (data === undefined || data === null) {
+      dispatch(
+        addModalData({
+          id: "",
+          image: "",
+          name: "",
+          author: "",
+          sources: [],
+          follow: false,
+        })
+      );
+    } else {
+      dispatch(addModalData(data));
+    }
+  }, [dispatch, data]);
 
   const handleSourceFollow = async (linkId: string, source: string) => {
-    if (!data.follow) {
-      await axios({
-        method: "POST",
-        url: "http://localhost:8080/api/follow",
-        data: { mangaId: data.id, sourceId: source },
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*",
-        },
+    if (!modalData.follow) {
+      triggerNewFollow({
+        mangaId: modalData.id,
+        sourceId: source,
       });
     } else {
-      await axios({
-        method: "PATCH",
-        url: "http://localhost:8080/api/follow",
-        data: {
-          mangaId: data.id,
-          sourceId: source,
-          action: "delete",
-          linkId,
-        },
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*",
-        },
+      triggerChangeFollow({
+        mangaId: modalData.id,
+        sourceId: source,
+        action: "delete",
+        linkId,
       });
     }
   };
 
-  const handleDeleteAllFollows = async () => {};
+  const handleCloseModal = () => {
+    dispatch(changeState());
+    dispatch(
+      addModalData({
+        id: "",
+        image: "",
+        name: "",
+        author: "",
+        sources: [],
+        follow: false,
+      })
+    );
+    dispatch(setMangaId(""));
+  };
 
-  return data.name !== "" ? (
+  const handleDeleteAllFollows = async () => {
+    triggerDeleteFollow(mangaId);
+  };
+
+  return isSuccess ? (
     <div className={styles.container}>
-      <div className={styles.close} onClick={() => dispatch(changeState())}>
+      <div className={styles.close} onClick={() => handleCloseModal()}>
         X
       </div>
-      <h1>{data.name}</h1>
-      <img src={data.image} alt={data.name} />
-      <p>Autor: {data.author}</p>
+      <h1>{modalData.name}</h1>
+      <img src={modalData.image} alt={modalData.name} />
+      <p>Autor: {modalData.author}</p>
       <div className={styles.sources}>
-        {data.sources.map((i) => (
+        {modalData.sources.map((i) => (
           <div
             key={i.id}
             className={
-              data.follow === true
+              modalData.follow === true
                 ? `${styles.following} ${styles.source_item}`
                 : `${styles.nofollow} ${styles.source_item}`
             }
@@ -100,5 +111,3 @@ function Modal() {
     </div>
   );
 }
-
-export default Modal;

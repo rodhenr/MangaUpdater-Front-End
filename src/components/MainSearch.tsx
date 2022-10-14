@@ -23,7 +23,7 @@ export default function MainSearch() {
     } else {
       dispatch(addSearchData(data));
     }
-  }, [data]);
+  }, [dispatch, data]);
 
   const openModal = (mangaId: string) => {
     dispatch(setMangaId(mangaId));
@@ -54,7 +54,7 @@ export default function MainSearch() {
     </div>
   ) : (
     <div className={styles.noresult}>
-      <p>Nenhum resultado encontrado</p>
+      <p>Nenhum resultado encontrado para "{searchItem}"</p>
     </div>
   );
 }

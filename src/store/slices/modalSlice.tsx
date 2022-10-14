@@ -47,13 +47,13 @@ export const modalSlice = createSlice({
     setMangaId: (state, action: PayloadAction<string>) => {
       state.mangaId = action.payload;
     },
-    addData: (state, action: PayloadAction<DataModal>) => {
+    addModalData: (state, action: PayloadAction<DataModal>) => {
       state.data = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addData, changeState, setMangaId } = modalSlice.actions;
+export const { addModalData, changeState, setMangaId } = modalSlice.actions;
 
 export default modalSlice.reducer;

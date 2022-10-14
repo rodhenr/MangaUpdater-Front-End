@@ -5,17 +5,13 @@ import { addData } from "../store/slices/homeDataSlice";
 import { checkDate } from "../utils/dateCheck";
 import Modal from "./Modal";
 import { checkName } from "../utils/nameCheck";
-import {
-  addErr,
-  addSearchData,
-  changeSearch,
-} from "../store/slices/searchSlice";
+import { addSearchData, changeSearch } from "../store/slices/searchSlice";
 import { changeState, setMangaId } from "../store/slices/modalSlice";
 import styles from "../assets/styles/components/Home.module.scss";
 import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
 
 export default function Home() {
-  const { data, isSuccess, isError } = useGetMangasQuery(undefined, {
+  const { data, isSuccess, isError, isLoading } = useGetMangasQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   const dispatch = useDispatch();
@@ -28,20 +24,19 @@ export default function Home() {
     } else {
       dispatch(addData(data));
     }
-  }, [data]);
+  }, [dispatch, data]);
 
   useEffect(() => {
     dispatch(addSearchData([]));
     dispatch(changeSearch(""));
-    dispatch(addErr(""));
-  }, []);
+  }, [dispatch]);
 
   const openModal = (mangaId: string) => {
     dispatch(setMangaId(mangaId));
     dispatch(changeState());
   };
 
-  return isSuccess ? (
+  return isSuccess && (mangaData.length > 0 || modalOpen === true) ? (
     <div className={styles.container}>
       {modalOpen && <Modal />}
       {mangaData.map((i, index) => {
@@ -73,9 +68,13 @@ export default function Home() {
     <div className={styles.err}>
       <p>Ocorreu um problema...</p>
     </div>
-  ) : (
+  ) : isLoading ? (
     <div className={styles.loading}>
       <p>Carregando...</p>
+    </div>
+  ) : (
+    <div className={styles.noresult}>
+      <p>Você não está seguindo nenhum mangá</p>
     </div>
   );
 }

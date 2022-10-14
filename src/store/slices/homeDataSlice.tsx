@@ -17,12 +17,10 @@ export interface Data {
 
 export interface Home {
   data: Data[];
-  err: string;
 }
 
 const initialState: Home = {
   data: [],
-  err: "",
 };
 
 export const homeDataSlice = createSlice({
@@ -35,13 +33,10 @@ export const homeDataSlice = createSlice({
     removeData: (state) => {
       state.data = [];
     },
-    addHomeErr: (state, action) => {
-      state.err = action.payload;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addData, removeData, addHomeErr } = homeDataSlice.actions;
+export const { addData, removeData } = homeDataSlice.actions;
 
 export default homeDataSlice.reducer;
