@@ -41,8 +41,8 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    changeState: (state) => {
-      state.open = !state.open;
+    changeState: (state, action: PayloadAction<boolean>) => {
+      state.open = action.payload;
     },
     setMangaId: (state, action: PayloadAction<string>) => {
       state.mangaId = action.payload;

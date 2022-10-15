@@ -5,6 +5,11 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { changeSearch } from "../store/slices/searchSlice";
 import styles from "../assets/styles/components/Search.module.scss";
+import {
+  addModalData,
+  changeState,
+  setMangaId,
+} from "../store/slices/modalSlice";
 
 export function Search() {
   const navigate = useNavigate();
@@ -17,9 +22,20 @@ export function Search() {
 
   const handleSubmit = () => {
     if (item.length < 3) return;
-    
     dispatch(changeSearch(item));
     setItem("");
+    dispatch(changeState(false));
+    dispatch(
+      addModalData({
+        id: "",
+        image: "",
+        name: "",
+        author: "",
+        sources: [],
+        follow: false,
+      })
+    );
+    dispatch(setMangaId(""));
     navigate("/search");
   };
 
@@ -35,7 +51,7 @@ export function Search() {
       <div className={styles.bar}>
         <input
           type="text"
-          placeholder="Pesquise por um mangá (minimo 3 caracteres)"
+          placeholder="Pesquisar"
           value={item}
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handleKeyDown(e)}

@@ -1,8 +1,11 @@
 import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { changeState, setMangaId } from "../store/slices/modalSlice";
-import { addModalData } from "../store/slices/modalSlice";
+import {
+  addModalData,
+  changeState,
+  setMangaId,
+} from "../store/slices/modalSlice";
 import {
   useGetModalMangaQuery,
   useFollowNewMangaMutation,
@@ -54,7 +57,7 @@ export default function Modal() {
   };
 
   const handleCloseModal = () => {
-    dispatch(changeState());
+    dispatch(changeState(false));
     dispatch(
       addModalData({
         id: "",
@@ -77,9 +80,9 @@ export default function Modal() {
       <div className={styles.close} onClick={() => handleCloseModal()}>
         X
       </div>
-      <h1>{modalData.name}</h1>
       <img src={modalData.image} alt={modalData.name} />
-      <p>Autor: {modalData.author}</p>
+      <h1>{modalData.name}</h1>
+      <p className={styles.author}>Autor: {modalData.author}</p>
       <div className={styles.sources}>
         {modalData.sources.map((i) => (
           <div
@@ -91,7 +94,7 @@ export default function Modal() {
             }
             onClick={() => handleSourceFollow(i.linkId, i.id)}
           >
-            <p className={styles.last_chapter}>Último: Ch {i.lastChapter}</p>
+            <p className={styles.last_chapter}>Capítulo {i.lastChapter}</p>
             <p className={styles.source}>MangaUpdates</p>
           </div>
         ))}

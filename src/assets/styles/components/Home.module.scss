@@ -17,22 +17,20 @@
   border-radius: 15px;
   box-sizing: border-box;
   display: grid;
-  font-size: 0.8rem;
-  grid-template-columns: 1fr 105px;
-  height: 45px;
+  font-size: 0.75rem;
+  grid-template-columns: 1fr 120px;
+  height: 40px;
   padding: 0 0.4rem;
   overflow: hidden;
   position: relative;
-  width: 100%;
 
   img {
-    height: 50px;
     left: 0;
-    object-fit: cover;
-    opacity: 0.25;
+    min-width: 100%;
+    max-width: 100%;
+    opacity: 0.4;
     position: absolute;
-    top: 0;
-    width: 100%;
+    rotate: -90deg;
     z-index: -1;
   }
 

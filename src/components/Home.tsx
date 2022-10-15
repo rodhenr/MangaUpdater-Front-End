@@ -6,7 +6,11 @@ import { checkDate } from "../utils/dateCheck";
 import Modal from "./Modal";
 import { checkName } from "../utils/nameCheck";
 import { addSearchData, changeSearch } from "../store/slices/searchSlice";
-import { changeState, setMangaId } from "../store/slices/modalSlice";
+import {
+  changeState,
+  setMangaId,
+  addModalData,
+} from "../store/slices/modalSlice";
 import styles from "../assets/styles/components/Home.module.scss";
 import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
 
@@ -29,11 +33,24 @@ export default function Home() {
   useEffect(() => {
     dispatch(addSearchData([]));
     dispatch(changeSearch(""));
-  }, [dispatch]);
+    if (!modalOpen) return;
+    dispatch(changeState(false));
+    dispatch(
+      addModalData({
+        id: "",
+        image: "",
+        name: "",
+        author: "",
+        sources: [],
+        follow: false,
+      })
+    );
+    dispatch(setMangaId(""));
+  }, []);
 
   const openModal = (mangaId: string) => {
     dispatch(setMangaId(mangaId));
-    dispatch(changeState());
+    dispatch(changeState(true));
   };
 
   return isSuccess && (mangaData.length > 0 || modalOpen === true) ? (
@@ -54,10 +71,10 @@ export default function Home() {
               onClick={() => openModal(i.sources.mangaId)}
             >
               <img src={i.image} alt="manga_image" />
-              <p>{checkName(i.name, 30)}</p>
+              <p>{checkName(i.name, 45)}</p>
               <div className={styles.chapter_info}>
                 <p>Capítulo: {i.sources.lastChapter}</p>
-                <p>Scan: {checkName(i.sources.scan, 10)}</p>
+                <p>Scan: {checkName(i.sources.scan, 15)}</p>
               </div>
             </div>
           </div>

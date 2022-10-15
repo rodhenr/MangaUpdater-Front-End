@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSearchData } from "../store/slices/searchSlice";
 import { checkName } from "../utils/nameCheck";
 import styles from "../assets/styles/components/MainSearch.module.scss";
-import { changeState, setMangaId } from "../store/slices/modalSlice";
+import {
+  changeState,
+  setMangaId,
+  addModalData,
+} from "../store/slices/modalSlice";
 import Modal from "./Modal";
 import { useSearchMangasQuery } from "../store/api/searchApiSlice";
 
@@ -25,9 +29,26 @@ export default function MainSearch() {
     }
   }, [dispatch, data]);
 
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    dispatch(changeState(false));
+    dispatch(
+      addModalData({
+        id: "",
+        image: "",
+        name: "",
+        author: "",
+        sources: [],
+        follow: false,
+      })
+    );
+    dispatch(setMangaId(""));
+  }, []);
+
   const openModal = (mangaId: string) => {
     dispatch(setMangaId(mangaId));
-    dispatch(changeState());
+    dispatch(changeState(true));
   };
 
   return isSuccess && searchData.length > 0 ? (
@@ -40,7 +61,9 @@ export default function MainSearch() {
           onClick={() => openModal(i.id)}
         >
           <img src={i.image} alt={i.name} />
-          <p>{checkName(i.name, 21)}</p>
+          <div className={styles.name}>
+            <p>{checkName(i.name, 21)}</p>
+          </div>
         </div>
       ))}
     </div>
