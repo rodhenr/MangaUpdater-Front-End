@@ -1,7 +1,6 @@
-$width: calc((100vw - 1.5rem) / 3);
+$width: calc((100vw - 1.5rem - 1px) / 3);
 
 .container {
-  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(3, $width);
   grid-template-rows: repeat(auto-fill, 180px);
@@ -13,7 +12,6 @@ $width: calc((100vw - 1.5rem) / 3);
 
 .chapter_container {
   align-items: center;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-width: 100%;

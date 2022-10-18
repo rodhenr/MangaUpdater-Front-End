@@ -39,6 +39,7 @@ export default function MainSearch() {
         image: "",
         name: "",
         author: "",
+        genres: "",
         sources: [],
         follow: false,
       })

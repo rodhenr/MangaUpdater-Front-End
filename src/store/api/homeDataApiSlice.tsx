@@ -4,14 +4,13 @@ interface MangaData {
   image: string;
   name: string;
   author: string;
+  genres: string;
   sources: {
-    mangaId: string;
+    sourceID: string;
+    pathID: string;
     chapter: string;
-    id: string;
-    linkId: string;
-    lastChapter: string;
-    scan: string;
     date: Date;
+    scanlator: string;
   };
 }
 

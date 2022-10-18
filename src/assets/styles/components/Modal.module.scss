@@ -1,21 +1,29 @@
 .container {
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100vw;
+  z-index: 100;
+}
+
+.container_intern {
+  align-items: center;
   background-color: #1b263b;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 22px 70px 4px;
   box-sizing: border-box;
   color: #fff;
   display: grid;
   font-family: "Roboto Condensed", sans-serif;
-  grid-template-rows: 220px 50px 30px 50px 50px;
-  height: 400px;
+  grid-template-rows: 220px 50px 25px 35px 50px 50px;
+  height: 430px;
   justify-content: center;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  right: 0;
+  position: relative;
   width: 350px;
-  z-index: 100;
 
   img {
     justify-self: center;
@@ -38,10 +46,15 @@
   }
 }
 
-.author {
+.author,
+.genres {
   align-self: flex-start;
   margin-left: 0.5rem !important;
   text-align: start !important;
+
+  span {
+    font-weight: 700;
+  }
 }
 
 .close {
@@ -61,6 +74,11 @@
   right: 2px;
   top: -5px;
   width: 25px;
+
+  &:hover {
+    background-color: #000;
+    color: #f3cf95;
+  }
 }
 
 .followingB {

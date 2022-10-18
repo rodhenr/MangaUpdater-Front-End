@@ -1,18 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Sources {
+  sourceID: string;
+  pathID: string;
+  chapter: string;
+  date: Date;
+  scanlator: string;
+}
 export interface Data {
   image: string;
   name: string;
-  author: string;
-  sources: {
-    mangaId: string;
-    chapter: string;
-    id: string;
-    linkId: string;
-    lastChapter: string;
-    scan: string;
-    date: Date;
-  };
+  mangaID: string;
+  sources: Sources[];
 }
 
 export interface Home {

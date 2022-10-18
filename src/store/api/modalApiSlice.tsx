@@ -1,64 +1,65 @@
 import { apiSlice } from "./apiSlice";
 
 export interface Sources {
-  id: string;
-  linkId: string;
-  lastChapter: string;
-  scan: string;
+  sourceID: string;
+  pathID: string;
+  chapter: string;
   date: Date;
+  scanlator: string;
 }
 
 export interface DataModal {
   id: string;
   image: string;
   name: string;
+  genres: string;
   author: string;
   sources: Sources[];
   follow: boolean;
 }
 
 interface FollowNew {
-  mangaId: string;
-  sourceId: string;
+  mangaID: string;
+  sourceID: string;
 }
 
 interface ChangeFollow {
-  mangaId: string;
-  sourceId: string;
+  mangaID: string;
+  sourceID: string;
   action: string;
-  linkId: string;
+  pathID: string;
 }
 
 export const modalApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getModalManga: builder.query<DataModal, string>({
-      query: (mangaId) => ({
-        url: `/api/manga/modal?mangaId=${mangaId}`,
+      query: (mangaID) => ({
+        url: `/api/manga/modal?mangaID=${mangaID}`,
         method: "GET",
       }),
       providesTags: ["Modal"],
     }),
     followNewManga: builder.mutation<void, FollowNew>({
-      query: ({ mangaId, sourceId }) => ({
+      query: ({ mangaID, sourceID }) => ({
         url: "/api/follow",
         method: "POST",
-        body: { mangaId, sourceId },
+        body: { mangaID, sourceID },
       }),
       invalidatesTags: ["Modal", "Data"],
     }),
     changeFollow: builder.mutation<void, ChangeFollow>({
-      query: ({ mangaId, sourceId, action, linkId }) => ({
+      query: ({ action, pathID, sourceID, mangaID }) => ({
         url: "/api/follow",
         method: "PATCH",
-        body: { mangaId, sourceId, action, linkId },
+        body: { action, pathID, sourceID, mangaID },
       }),
       invalidatesTags: ["Modal", "Data"],
     }),
     deleteFollow: builder.mutation<void, string>({
-      query: (mangaId) => ({
+      query: (mangaID) => ({
         url: "/api/follow",
         method: "DELETE",
-        body: { mangaId },
+        body: { mangaID },
       }),
       invalidatesTags: ["Modal", "Data"],
     }),

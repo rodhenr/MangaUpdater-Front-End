@@ -31,6 +31,7 @@ export default function Modal() {
           image: "",
           name: "",
           author: "",
+          genres: "",
           sources: [],
           follow: false,
         })
@@ -40,18 +41,22 @@ export default function Modal() {
     }
   }, [dispatch, data]);
 
-  const handleSourceFollow = async (linkId: string, source: string) => {
+  const handleSourceFollow = async (
+    pathID: string,
+    sourceID: string,
+    mangaID: string
+  ) => {
     if (!modalData.follow) {
       triggerNewFollow({
-        mangaId: modalData.id,
-        sourceId: source,
+        mangaID,
+        sourceID,
       });
     } else {
       triggerChangeFollow({
-        mangaId: modalData.id,
-        sourceId: source,
+        mangaID: modalData.id,
+        sourceID,
         action: "delete",
-        linkId,
+        pathID,
       });
     }
   };
@@ -64,6 +69,7 @@ export default function Modal() {
         image: "",
         name: "",
         author: "",
+        genres: "",
         sources: [],
         follow: false,
       })
@@ -77,36 +83,39 @@ export default function Modal() {
 
   return isSuccess ? (
     <div className={styles.container}>
-      <div className={styles.close} onClick={() => handleCloseModal()}>
-        X
-      </div>
-      <img src={modalData.image} alt={modalData.name} />
-      <h1>{modalData.name}</h1>
-      <p className={styles.author}>Autor: {modalData.author}</p>
-      <div className={styles.sources}>
-        {modalData.sources.map((i) => (
-          <div
-            key={i.id}
-            className={
-              modalData.follow === true
-                ? `${styles.following} ${styles.source_item}`
-                : `${styles.nofollow} ${styles.source_item}`
-            }
-            onClick={() => handleSourceFollow(i.linkId, i.id)}
+      <div className={styles.container_intern}>
+        <div className={styles.close} onClick={() => handleCloseModal()}>
+          X
+        </div>
+        <img src={modalData.image} alt={modalData.name} />
+        <h1>{modalData.name}</h1>
+        <p className={styles.author}><span>Autor:</span> {modalData.author}</p>
+        <p className={styles.genres}><span>Gêneros:</span> {modalData.genres}</p>
+        <div className={styles.sources}>
+          {modalData.sources.map((i, index) => (
+            <div
+              key={i.pathID}
+              className={
+                modalData.follow === true
+                  ? `${styles.following} ${styles.source_item}`
+                  : `${styles.nofollow} ${styles.source_item}`
+              }
+              onClick={() => handleSourceFollow(i.pathID, i.sourceID, "teste")} // arrumar aqui
+            >
+              <p className={styles.last_chapter}>Capítulo {i.chapter}</p>
+              <p className={styles.source}>MangaUpdates</p>
+            </div>
+          ))}
+        </div>
+        {data.follow === true && (
+          <button
+            onClick={() => handleDeleteAllFollows()}
+            className={`${styles.followingB} ${styles.button}`}
           >
-            <p className={styles.last_chapter}>Capítulo {i.lastChapter}</p>
-            <p className={styles.source}>MangaUpdates</p>
-          </div>
-        ))}
+            Parar de Seguir Todos
+          </button>
+        )}
       </div>
-      {data.follow === true && (
-        <button
-          onClick={() => handleDeleteAllFollows()}
-          className={`${styles.followingB} ${styles.button}`}
-        >
-          Parar de Seguir Todos
-        </button>
-      )}
     </div>
   ) : (
     <div className={styles.container}>

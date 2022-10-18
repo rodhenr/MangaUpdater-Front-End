@@ -31,6 +31,7 @@ export function Search() {
         image: "",
         name: "",
         author: "",
+        genres: "",
         sources: [],
         follow: false,
       })
@@ -45,9 +46,6 @@ export function Search() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.icon} onClick={() => handleSubmit()}>
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </div>
       <div className={styles.bar}>
         <input
           type="text"
@@ -56,6 +54,9 @@ export function Search() {
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handleKeyDown(e)}
         />
+      </div>
+      <div className={styles.icon} onClick={() => handleSubmit()}>
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
       </div>
     </div>
   );

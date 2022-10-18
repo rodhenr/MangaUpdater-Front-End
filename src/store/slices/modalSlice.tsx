@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface Sources {
-  id: string;
-  linkId: string;
-  lastChapter: string;
-  scan: string;
+  sourceID: string;
+  pathID: string;
+  chapter: string;
   date: Date;
+  scanlator: string;
 }
 
 export interface DataModal {
@@ -14,6 +14,7 @@ export interface DataModal {
   image: string;
   name: string;
   author: string;
+  genres: string;
   sources: Sources[];
   follow: boolean;
 }
@@ -32,6 +33,7 @@ const initialState: InitialState = {
     image: "",
     name: "",
     author: "",
+    genres: "",
     sources: [],
     follow: false,
   },

@@ -1,11 +1,11 @@
 import { apiSlice } from "./apiSlice";
 
 interface Source {
-  id: string;
-  linkId: string;
-  lastChapter: string;
-  scan: string;
+  sourceID: string;
+  pathID: string;
+  chapter: string;
   date: Date;
+  scanlator: string;
 }
 
 interface SearchData {

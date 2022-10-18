@@ -18,6 +18,7 @@ export default function Home() {
   const { data, isSuccess, isError, isLoading } = useGetMangasQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+
   const dispatch = useDispatch();
   const mangaData = useSelector((state: RootState) => state.homeData.data);
   const modalOpen = useSelector((state: RootState) => state.modal.open);
@@ -28,7 +29,7 @@ export default function Home() {
     } else {
       dispatch(addData(data));
     }
-  }, [dispatch, data]);
+  }, [data]);
 
   useEffect(() => {
     dispatch(addSearchData([]));
@@ -41,6 +42,7 @@ export default function Home() {
         image: "",
         name: "",
         author: "",
+        genres: "",
         sources: [],
         follow: false,
       })
@@ -55,11 +57,10 @@ export default function Home() {
 
   return isSuccess && (mangaData.length > 0 || modalOpen === true) ? (
     <div className={styles.container}>
-      {modalOpen && <Modal />}
       {mangaData.map((i, index) => {
         let last = "";
-        const check = checkDate(i.sources.date);
-        if (index > 0) last = checkDate(mangaData[index - 1].sources.date);
+        const check = checkDate(i.sources[0].date);
+        if (index > 0) last = checkDate(mangaData[index - 1].sources[0].date);
 
         return (
           <div className={styles.container_chapter} key={index}>
@@ -68,13 +69,13 @@ export default function Home() {
             ) : null}
             <div
               className={styles.chapter}
-              onClick={() => openModal(i.sources.mangaId)}
+              onClick={() => openModal(i.mangaID)}
             >
               <img src={i.image} alt="manga_image" />
               <p>{checkName(i.name, 45)}</p>
               <div className={styles.chapter_info}>
-                <p>Capítulo: {i.sources.lastChapter}</p>
-                <p>Scan: {checkName(i.sources.scan, 15)}</p>
+                <p>Capítulo: {i.sources[0].chapter}</p>
+                <p>Scan: {checkName(i.sources[0].scanlator, 15)}</p>
               </div>
             </div>
           </div>
