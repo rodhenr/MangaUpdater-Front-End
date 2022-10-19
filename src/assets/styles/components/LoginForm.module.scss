@@ -1,0 +1,54 @@
+.container {
+  align-items: center;
+  background-color: #edf2f4;
+  display: grid;
+  font-family: "Roboto Condensed", sans-serif;
+  grid-template-rows: 100px 1fr;
+  height: 400px;
+  justify-content: center;
+  width: 300px;
+}
+
+.login_text {
+  align-self: flex-end;
+
+  p {
+    color: #ef233c;
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+
+  button {
+    background-color: #ef233c;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    height: 25px;
+    margin-top: 2rem;
+    width: 150px;
+  }
+}
+
+.form_input {
+  align-self: center;
+
+  input {
+    height: 22px;
+    width: 200px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+}
