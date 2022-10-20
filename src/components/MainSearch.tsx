@@ -9,7 +9,6 @@ import {
   setMangaId,
   addModalData,
 } from "../store/slices/modalSlice";
-import Modal from "./Modal";
 import { useSearchMangasQuery } from "../store/api/searchApiSlice";
 
 export default function MainSearch() {
@@ -54,7 +53,6 @@ export default function MainSearch() {
 
   return isSuccess && searchData.length > 0 ? (
     <div className={styles.container}>
-      {modalOpen && <Modal />}
       {searchData.map((i) => (
         <div
           key={i.id}

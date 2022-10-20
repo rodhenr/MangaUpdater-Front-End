@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { faUnlock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoginMutation } from "../store/api/authApiSlice";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -17,7 +19,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [trigger, { error }] = useLoginMutation();
+  const [trigger] = useLoginMutation();
 
   const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -47,29 +49,32 @@ export default function LoginForm() {
   return (
     <div className={styles.container}>
       <div className={styles.login_text}>
-        <p>Faça o login e descubra novos mangás!</p>
+        <p>ENTRAR</p>
       </div>
       <form className={styles.form}>
-        <div className={styles.form_input}>
-          <label htmlFor="email">E-MAIL: </label>
+        <div className={`${styles.form_input} ${styles.input_first}`}>
+          <FontAwesomeIcon icon={faUser} />
           <input
             type="email"
-            placeholder="Digite seu email"
+            placeholder="Email"
             id="email"
             value={email}
             onChange={(e) => handleChange(e)}
           />
         </div>
         <div className={styles.form_input}>
-          <label htmlFor="password">SENHA: </label>
+          <FontAwesomeIcon icon={faUnlock} />
           <input
             type="password"
-            placeholder="Digite sua senha"
+            placeholder="Senha"
             id="password"
             value={password}
             onChange={(e) => handleChange(e)}
           />
         </div>
+        <p className={styles.register}>
+          Não possui uma conta? <span>Cadastre-se já!</span>
+        </p>
         <button onClick={(e) => handleSubmitForm(e)}>LOGIN</button>
       </form>
     </div>

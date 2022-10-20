@@ -89,8 +89,12 @@ export default function Modal() {
         </div>
         <img src={modalData.image} alt={modalData.name} />
         <h1>{modalData.name}</h1>
-        <p className={styles.author}><span>Autor:</span> {modalData.author}</p>
-        <p className={styles.genres}><span>Gêneros:</span> {modalData.genres}</p>
+        <p className={styles.author}>
+          <span>Autor:</span> {modalData.author}
+        </p>
+        <p className={styles.genres}>
+          <span>Gêneros:</span> {modalData.genres}
+        </p>
         <div className={styles.sources}>
           {modalData.sources.map((i, index) => (
             <div
@@ -100,7 +104,7 @@ export default function Modal() {
                   ? `${styles.following} ${styles.source_item}`
                   : `${styles.nofollow} ${styles.source_item}`
               }
-              onClick={() => handleSourceFollow(i.pathID, i.sourceID, "teste")} // arrumar aqui
+              onClick={() => handleSourceFollow(i.pathID, i.sourceID, mangaId)} // arrumar aqui
             >
               <p className={styles.last_chapter}>Capítulo {i.chapter}</p>
               <p className={styles.source}>MangaUpdates</p>

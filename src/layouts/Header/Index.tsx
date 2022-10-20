@@ -20,9 +20,11 @@ export function Index() {
           />
           <p>USER</p>
         </div>
-        <FontAwesomeIcon icon={faRightFromBracket} />
+        <div onClick={() => navigate("/")}>
+          <FontAwesomeIcon icon={faRightFromBracket} />
+        </div>
       </div>
-      <h1 onClick={() => navigate("/")}>MANGA UPDATER</h1>
+      <h1 onClick={() => navigate("/home")}>MANGA UPDATER</h1>
     </div>
   );
 }
