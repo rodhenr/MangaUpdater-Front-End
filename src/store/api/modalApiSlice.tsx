@@ -6,6 +6,7 @@ export interface Sources {
   chapter: string;
   date: Date;
   scanlator: string;
+  follow: boolean;
 }
 
 export interface DataModal {
@@ -15,7 +16,6 @@ export interface DataModal {
   genres: string;
   author: string;
   sources: Sources[];
-  follow: boolean;
 }
 
 interface FollowNew {

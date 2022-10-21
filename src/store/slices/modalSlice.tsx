@@ -7,6 +7,7 @@ export interface Sources {
   chapter: string;
   date: Date;
   scanlator: string;
+  follow: boolean;
 }
 
 export interface DataModal {
@@ -16,7 +17,6 @@ export interface DataModal {
   author: string;
   genres: string;
   sources: Sources[];
-  follow: boolean;
 }
 
 interface InitialState {
@@ -35,7 +35,6 @@ const initialState: InitialState = {
     author: "",
     genres: "",
     sources: [],
-    follow: false,
   },
 };
 

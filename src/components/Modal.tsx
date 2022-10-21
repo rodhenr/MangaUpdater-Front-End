@@ -33,7 +33,6 @@ export default function Modal() {
           author: "",
           genres: "",
           sources: [],
-          follow: false,
         })
       );
     } else {
@@ -44,18 +43,27 @@ export default function Modal() {
   const handleSourceFollow = async (
     pathID: string,
     sourceID: string,
-    mangaID: string
+    mangaID: string,
+    follow: boolean
   ) => {
-    if (!modalData.follow) {
+    const isFollow = modalData.sources.some((i) => i.follow === true);
+    if (!isFollow) {
       triggerNewFollow({
         mangaID,
         sourceID,
+      });
+    } else if (follow) {
+      triggerChangeFollow({
+        mangaID: modalData.id,
+        sourceID,
+        action: "delete",
+        pathID,
       });
     } else {
       triggerChangeFollow({
         mangaID: modalData.id,
         sourceID,
-        action: "delete",
+        action: "add",
         pathID,
       });
     }
@@ -71,7 +79,6 @@ export default function Modal() {
         author: "",
         genres: "",
         sources: [],
-        follow: false,
       })
     );
     dispatch(setMangaId(""));
@@ -96,22 +103,24 @@ export default function Modal() {
           <span>Gêneros:</span> {modalData.genres}
         </p>
         <div className={styles.sources}>
-          {modalData.sources.map((i, index) => (
+          {modalData.sources.map((i) => (
             <div
               key={i.pathID}
               className={
-                modalData.follow === true
+                i.follow === true
                   ? `${styles.following} ${styles.source_item}`
                   : `${styles.nofollow} ${styles.source_item}`
               }
-              onClick={() => handleSourceFollow(i.pathID, i.sourceID, mangaId)} // arrumar aqui
+              onClick={() =>
+                handleSourceFollow(i.pathID, i.sourceID, mangaId, i.follow)
+              } // arrumar aqui
             >
               <p className={styles.last_chapter}>Capítulo {i.chapter}</p>
               <p className={styles.source}>MangaUpdates</p>
             </div>
           ))}
         </div>
-        {data.follow === true && (
+        {modalData.sources.some((i) => i.follow === true) === true && (
           <button
             onClick={() => handleDeleteAllFollows()}
             className={`${styles.followingB} ${styles.button}`}

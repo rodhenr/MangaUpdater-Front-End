@@ -40,7 +40,6 @@ export default function MainSearch() {
         author: "",
         genres: "",
         sources: [],
-        follow: false,
       })
     );
     dispatch(setMangaId(""));

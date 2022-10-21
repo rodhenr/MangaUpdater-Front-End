@@ -3,7 +3,6 @@ import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { addData } from "../store/slices/homeDataSlice";
 import { checkDate } from "../utils/dateCheck";
-import Modal from "./Modal";
 import { checkName } from "../utils/nameCheck";
 import { addSearchData, changeSearch } from "../store/slices/searchSlice";
 import {
@@ -44,7 +43,6 @@ export default function Home() {
         author: "",
         genres: "",
         sources: [],
-        follow: false,
       })
     );
     dispatch(setMangaId(""));

@@ -33,7 +33,6 @@ export function Search() {
         author: "",
         genres: "",
         sources: [],
-        follow: false,
       })
     );
     dispatch(setMangaId(""));
