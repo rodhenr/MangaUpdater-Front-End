@@ -4,9 +4,17 @@ import profileImage from "../../assets/images/profile-image.jpg";
 import { useNavigate } from "react-router";
 import headerImage from "../../assets/images/header-image.jpg";
 import styles from "../../assets/styles/layouts/Header.module.scss";
+import { useDispatch } from "react-redux";
+import { removeToken } from "../../store/slices/authSlice";
 
 export function Index() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(removeToken());
+    navigate("/");
+  };
 
   return (
     <div className={styles.container}>
@@ -20,7 +28,7 @@ export function Index() {
           />
           <p>USER</p>
         </div>
-        <div onClick={() => navigate("/")}>
+        <div onClick={() => handleLogout()}>
           <FontAwesomeIcon icon={faRightFromBracket} />
         </div>
       </div>

@@ -5,6 +5,12 @@ interface LoginData {
   password: string;
 }
 
+interface RegisterData {
+  user: string;
+  password: string;
+  email: string;
+}
+
 interface TokenData {
   accessToken: string;
 }
@@ -18,7 +24,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { email, password },
       }),
     }),
+    register: builder.mutation<void, RegisterData>({
+      query: ({ email, password, user }) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: { email, password, user },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;

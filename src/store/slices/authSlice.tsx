@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface Data {
   token: string;
@@ -24,7 +25,6 @@ export const tokenSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { addToken, removeToken } = tokenSlice.actions;
-
+export const selectToken = (state: RootState) => state.auth.token;
 export default tokenSlice.reducer;

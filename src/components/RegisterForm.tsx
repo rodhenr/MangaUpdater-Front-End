@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { faUnlock, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faUnlock,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLoginMutation } from "../store/api/authApiSlice";
+import { useRegisterMutation } from "../store/api/authApiSlice";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { addToken } from "../store/slices/authSlice";
-import styles from "../assets/styles/components/LoginForm.module.scss";
+import styles from "../assets/styles/components/RegisterForm.module.scss";
 
 interface ErrorType {
   data: {
@@ -14,26 +16,25 @@ interface ErrorType {
   originalStatus: number;
 }
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
-  const [trigger] = useLoginMutation();
+  const [trigger] = useRegisterMutation();
 
   const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
-      const token = await trigger({ email, password }).unwrap();
-      dispatch(addToken(token.accessToken));
-      navigate("/home");
+      await trigger({ email, password, user }).unwrap();
+      navigate("/");
     } catch (err) {
       const error = err as ErrorType;
       if (error.originalStatus === 500) {
         alert("Servidor com erro... Tente novamente.");
-      } else if (error.originalStatus === 401) {
-        alert("Usuário ou senha inválido!");
+      } else if (error.originalStatus === 400) {
+        alert("Dados inválidos!");
       }
     }
   };
@@ -41,19 +42,31 @@ export default function LoginForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === "email") {
       setEmail(e.target.value);
-    } else {
+    } else if (e.target.id === "password") {
       setPassword(e.target.value);
+    } else {
+      setUser(e.target.value);
     }
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.login_text}>
-        <p>ENTRAR</p>
+      <div className={styles.register_text}>
+        <p>Registre-se</p>
       </div>
       <form className={styles.form}>
-        <div className={`${styles.form_input} ${styles.input_first}`}>
+        <div className={styles.form_input}>
           <FontAwesomeIcon icon={faUser} />
+          <input
+            type="text"
+            placeholder="Usuário"
+            id="user"
+            value={user}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className={`${styles.form_input} ${styles.input_first}`}>
+          <FontAwesomeIcon icon={faEnvelope} />
           <input
             type="email"
             placeholder="Email"
@@ -73,12 +86,12 @@ export default function LoginForm() {
           />
         </div>
         <p className={styles.register}>
-          Não possui uma conta?{" "}
-          <span onClick={() => navigate("/register")} role="button">
-            Cadastre-se já!
+          Já possui uma conta?{" "}
+          <span onClick={() => navigate("/")} role="button">
+            Faça login!
           </span>
         </p>
-        <button onClick={(e) => handleSubmitForm(e)}>LOGIN</button>
+        <button onClick={(e) => handleSubmitForm(e)}>REGISTRAR</button>
       </form>
     </div>
   );
