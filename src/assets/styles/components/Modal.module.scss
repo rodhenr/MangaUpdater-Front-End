@@ -19,7 +19,7 @@
   color: #fff;
   display: grid;
   font-family: "Roboto Condensed", sans-serif;
-  grid-template-rows: 220px 50px 25px 35px 50px 50px;
+  grid-template-rows: 220px 50px 18px 45px 50px 47px;
   height: 430px;
   justify-content: center;
   position: relative;
@@ -53,7 +53,12 @@
   text-align: start !important;
 
   span {
-    font-weight: 700;
+    font-size: 0.7rem;
+
+    &:first-child {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
   }
 }
 

@@ -15,7 +15,7 @@ export interface DataModal {
   image: string;
   name: string;
   author: string;
-  genres: string;
+  genres: string[];
   sources: Sources[];
 }
 
@@ -33,7 +33,7 @@ const initialState: InitialState = {
     image: "",
     name: "",
     author: "",
-    genres: "",
+    genres: [],
     sources: [],
   },
 };
@@ -51,10 +51,21 @@ export const modalSlice = createSlice({
     addModalData: (state, action: PayloadAction<DataModal>) => {
       state.data = action.payload;
     },
+    clearModalData: (state) => {
+      state.data = {
+        id: "",
+        image: "",
+        name: "",
+        author: "",
+        genres: [],
+        sources: [],
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addModalData, changeState, setMangaId } = modalSlice.actions;
+export const { addModalData, changeState, clearModalData, setMangaId } =
+  modalSlice.actions;
 
 export default modalSlice.reducer;

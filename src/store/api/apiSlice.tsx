@@ -29,9 +29,9 @@ const baseQueryWithReauth: BaseQueryFn<
 
   if (result.error && result.error.status === 403) {
     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-
     if (refreshResult.data) {
-      api.dispatch(addToken(refreshResult.data));
+      const data = refreshResult.data;
+      api.dispatch(addToken(data));
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(removeToken());

@@ -7,7 +7,7 @@ import styles from "../assets/styles/components/MainSearch.module.scss";
 import {
   changeState,
   setMangaId,
-  addModalData,
+  clearModalData,
 } from "../store/slices/modalSlice";
 import { useSearchMangasQuery } from "../store/api/searchApiSlice";
 
@@ -32,16 +32,7 @@ export default function MainSearch() {
     if (!modalOpen) return;
 
     dispatch(changeState(false));
-    dispatch(
-      addModalData({
-        id: "",
-        image: "",
-        name: "",
-        author: "",
-        genres: "",
-        sources: [],
-      })
-    );
+    dispatch(clearModalData());
     dispatch(setMangaId(""));
   }, []);
 

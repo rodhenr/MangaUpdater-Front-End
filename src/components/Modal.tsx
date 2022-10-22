@@ -1,17 +1,18 @@
 import type { RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   addModalData,
   changeState,
+  clearModalData,
   setMangaId,
 } from "../store/slices/modalSlice";
+import { useGetModalMangaQuery } from "../store/api/modalApiSlice";
 import {
-  useGetModalMangaQuery,
   useFollowNewMangaMutation,
   useChangeFollowMutation,
   useDeleteFollowMutation,
-} from "../store/api/modalApiSlice";
+} from "../store/api/followApiSlice";
 import styles from "../assets/styles/components/Modal.module.scss";
 
 export default function Modal() {
@@ -25,16 +26,7 @@ export default function Modal() {
 
   useEffect(() => {
     if (data === undefined || data === null) {
-      dispatch(
-        addModalData({
-          id: "",
-          image: "",
-          name: "",
-          author: "",
-          genres: "",
-          sources: [],
-        })
-      );
+      dispatch(clearModalData());
     } else {
       dispatch(addModalData(data));
     }
@@ -69,19 +61,17 @@ export default function Modal() {
     }
   };
 
-  const handleCloseModal = () => {
-    dispatch(changeState(false));
-    dispatch(
-      addModalData({
-        id: "",
-        image: "",
-        name: "",
-        author: "",
-        genres: "",
-        sources: [],
-      })
-    );
-    dispatch(setMangaId(""));
+  const handleCloseModal = (e: React.MouseEvent) => {
+    const targetClass = (e.target as Element).className;
+    
+    if (
+      targetClass.includes("Modal_container") ||
+      targetClass.includes("Modal_close")
+    ) {
+      dispatch(changeState(false));
+      dispatch(clearModalData());
+      dispatch(setMangaId(""));
+    }
   };
 
   const handleDeleteAllFollows = async () => {
@@ -89,19 +79,26 @@ export default function Modal() {
   };
 
   return isSuccess ? (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={(e) => handleCloseModal(e)}>
       <div className={styles.container_intern}>
-        <div className={styles.close} onClick={() => handleCloseModal()}>
+        <div className={styles.close} onClick={(e) => handleCloseModal(e)}>
           X
         </div>
         <img src={modalData.image} alt={modalData.name} />
         <h1>{modalData.name}</h1>
-        <p className={styles.author}>
-          <span>Autor:</span> {modalData.author}
-        </p>
-        <p className={styles.genres}>
-          <span>Gêneros:</span> {modalData.genres}
-        </p>
+        <div className={styles.author}>
+          <span>Autor:</span> <span>{modalData.author}</span>
+        </div>
+        <div className={styles.genres}>
+          <span>Gêneros: </span>
+          {modalData.genres.map((j, index) => {
+            if (index + 1 !== modalData.genres.length) {
+              return <span key={index}>{j}, </span>;
+            } else {
+              return <span key={index}>{j}</span>;
+            }
+          })}
+        </div>
         <div className={styles.sources}>
           {modalData.sources.map((i) => (
             <div
@@ -113,7 +110,7 @@ export default function Modal() {
               }
               onClick={() =>
                 handleSourceFollow(i.pathID, i.sourceID, mangaId, i.follow)
-              } // arrumar aqui
+              }
             >
               <p className={styles.last_chapter}>Capítulo {i.chapter}</p>
               <p className={styles.source}>MangaUpdates</p>

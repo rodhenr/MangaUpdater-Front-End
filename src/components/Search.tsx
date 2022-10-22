@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { changeSearch } from "../store/slices/searchSlice";
 import styles from "../assets/styles/components/Search.module.scss";
 import {
-  addModalData,
   changeState,
+  clearModalData,
   setMangaId,
 } from "../store/slices/modalSlice";
 
@@ -25,16 +25,7 @@ export function Search() {
     dispatch(changeSearch(item));
     setItem("");
     dispatch(changeState(false));
-    dispatch(
-      addModalData({
-        id: "",
-        image: "",
-        name: "",
-        author: "",
-        genres: "",
-        sources: [],
-      })
-    );
+    dispatch(clearModalData());
     dispatch(setMangaId(""));
     navigate("/search");
   };

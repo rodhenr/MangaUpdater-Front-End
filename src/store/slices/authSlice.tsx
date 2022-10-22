@@ -1,5 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+
+interface Payload {
+  accessToken: string;
+  user: string;
+}
 
 interface Data {
   token: string;
@@ -16,7 +21,9 @@ export const tokenSlice = createSlice({
   initialState,
   reducers: {
     addToken: (state, action) => {
-      state.token = action.payload;
+      const { accessToken, user } = action.payload;
+      state.token = accessToken;
+      state.user = user;
     },
     removeToken: (state) => {
       state.token = "";

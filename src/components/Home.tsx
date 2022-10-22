@@ -8,7 +8,7 @@ import { addSearchData, changeSearch } from "../store/slices/searchSlice";
 import {
   changeState,
   setMangaId,
-  addModalData,
+  clearModalData,
 } from "../store/slices/modalSlice";
 import styles from "../assets/styles/components/Home.module.scss";
 import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
@@ -34,17 +34,9 @@ export default function Home() {
     dispatch(addSearchData([]));
     dispatch(changeSearch(""));
     if (!modalOpen) return;
+
     dispatch(changeState(false));
-    dispatch(
-      addModalData({
-        id: "",
-        image: "",
-        name: "",
-        author: "",
-        genres: "",
-        sources: [],
-      })
-    );
+    dispatch(clearModalData());
     dispatch(setMangaId(""));
   }, []);
 
