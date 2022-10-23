@@ -26,7 +26,7 @@ export default function LoginForm() {
 
     try {
       const token = await trigger({ email, password }).unwrap();
-      dispatch(addToken(token.accessToken));
+      dispatch(addToken(token));
       navigate("/home");
     } catch (err) {
       const error = err as ErrorType;

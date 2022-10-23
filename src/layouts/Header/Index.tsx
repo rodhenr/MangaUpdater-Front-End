@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import profileImage from "../../assets/images/profile-image.jpg";
 import { useNavigate } from "react-router";
 import headerImage from "../../assets/images/header-image.jpg";
-import styles from "../../assets/styles/layouts/Header.module.scss";
-import { useDispatch } from "react-redux";
+import type { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 import { removeToken } from "../../store/slices/authSlice";
+import styles from "../../assets/styles/layouts/Header.module.scss";
 
 export function Index() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleLogout = () => {
     dispatch(removeToken());
@@ -26,7 +28,7 @@ export function Index() {
             src={profileImage}
             alt="user-avatar"
           />
-          <p>USER</p>
+          <p>{user.toUpperCase()}</p>
         </div>
         <div onClick={() => handleLogout()}>
           <FontAwesomeIcon icon={faRightFromBracket} />

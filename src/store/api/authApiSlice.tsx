@@ -13,6 +13,7 @@ interface RegisterData {
 
 interface TokenData {
   accessToken: string;
+  user: string;
 }
 
 export const authApiSlice = apiSlice.injectEndpoints({

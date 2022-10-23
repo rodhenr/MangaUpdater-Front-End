@@ -53,22 +53,24 @@ export default function Home() {
         if (index > 0) last = checkDate(mangaData[index - 1].sources[0].date);
 
         return (
-          <div className={styles.container_chapter} key={index}>
+          <>
             {(last !== "" || index === 0) && check !== last ? (
               <p className={styles.check}>{check}</p>
             ) : null}
-            <div
-              className={styles.chapter}
-              onClick={() => openModal(i.mangaID)}
-            >
-              <img src={i.image} alt="manga_image" />
-              <p>{checkName(i.name, 45)}</p>
-              <div className={styles.chapter_info}>
-                <p>Capítulo: {i.sources[0].chapter}</p>
-                <p>Scan: {checkName(i.sources[0].scanlator, 15)}</p>
+            <div className={styles.container_chapter} key={index}>
+              <div
+                className={styles.chapter}
+                onClick={() => openModal(i.mangaID)}
+              >
+                <img src={i.image} alt="manga_image" />
+                <p>{checkName(i.name, 45)}</p>
+                <div className={styles.chapter_info}>
+                  <p>Capítulo: {i.sources[0].chapter}</p>
+                  <p className={styles.scan}>Scan: {checkName(i.sources[0].scanlator, 15)}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         );
       })}
     </div>
