@@ -1,5 +1,5 @@
 $width768: calc((100vw / 5) - 1rem);
-$width1024: calc((100vw / 8) - 1rem);
+$width1024: calc((100vw / 7) - 1rem);
 
 .container {
   box-sizing: border-box;
@@ -16,14 +16,7 @@ $width1024: calc((100vw / 8) - 1rem);
   @media (min-width: 768px) {
     display: grid;
     gap: 0.3rem;
-    grid-template-columns: repeat(5, $width768);
-    grid-template-rows: repeat(autofill, 180px);
-  }
-
-  @media (min-width: 1024px) {
-    display: grid;
-    gap: 0.8rem;
-    grid-template-columns: repeat(8, $width1024);
+    grid-template-columns: repeat(auto-fit, 150px);
     grid-template-rows: repeat(autofill, 180px);
   }
 }
@@ -84,7 +77,7 @@ $width1024: calc((100vw / 8) - 1rem);
     img {
       border: 1px solid #fff;
       box-sizing: border-box;
-      height: 140px;
+      height: 160px;
       position: relative;
       rotate: none;
     }
@@ -95,16 +88,23 @@ $width1024: calc((100vw / 8) - 1rem);
   }
 }
 
+.mangaName {
+  color: #fca311 !important;
+  font-size: 0.85rem;
+}
+
 .chapter_info {
   display: flex;
   flex-direction: column;
 }
 
 .check {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
   margin: 0.8rem 0 0.5rem;
 
   @media (min-width: 768px) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.1rem;
     margin: 0.8rem 0.5rem 0.5rem;
   }
 }

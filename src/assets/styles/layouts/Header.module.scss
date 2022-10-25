@@ -43,6 +43,20 @@
     cursor: pointer;
     font-size: 1.4rem;
   }
+
+  @media (min-width: 1024px) {
+    .user_image {
+      height: 70px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    svg {
+      font-size: 1.7rem;
+    }
+  }
 }
 
 .info {
@@ -59,5 +73,11 @@
     color: #fff;
     font-size: 1.2rem;
     margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    p {
+      font-size: 1.5rem;
+    }
   }
 }

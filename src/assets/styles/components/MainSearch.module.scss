@@ -1,36 +1,41 @@
-$width: calc((100vw - 1.5rem - 1px) / 3);
-
 .container {
   display: grid;
-  grid-template-columns: repeat(3, $width);
+  grid-template-columns: repeat(auto-fit, 130px);
   grid-template-rows: repeat(auto-fill, 180px);
   font-family: "Roboto Condensed", sans-serif;
-  gap: 0.25rem;
+  gap: 0.5rem;
   margin: 0.5rem 0.5rem;
   position: relative;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, 150px);
+    grid-template-rows: repeat(auto-fill, 200px);
+  }
 }
 
 .chapter_container {
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-width: 100%;
-  max-width: 100%;
+  min-width: 130px;
+  max-width: 130px;
   position: relative;
 
   img {
     border: 1px solid #fff;
     box-sizing: border-box;
     height: 180px;
-    width: 100%;
+    width: 130px;
   }
 
-  &:nth-child(3n + 1) {
-    justify-self: flex-start;
-  }
+  @media (min-width: 1024px) {
+    min-width: 150px;
+    max-width: 150px;
 
-  &:nth-child(3n + 3) {
-    justify-self: flex-end;
+    img {
+      height: 200px;
+      width: 150px;
+    }
   }
 }
 
