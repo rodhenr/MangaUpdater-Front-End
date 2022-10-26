@@ -93,10 +93,11 @@
 .sources {
   align-items: center;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, 100px);
   justify-content: center;
   justify-self: flex-start;
   margin-left: 0.5rem;
+  width: calc(100% - 0.5rem);
 }
 
 .source_item {
