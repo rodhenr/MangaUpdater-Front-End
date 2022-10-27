@@ -1,3 +1,4 @@
+// Checa se o dia é hoje, ontem ou anterior
 export const checkDate = (date: Date) => {
   const today = new Date();
   const yesterday = new Date(today);

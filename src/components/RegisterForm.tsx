@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+
+import { useRegisterMutation } from "../store/api/authApiSlice";
+
+import { useNavigate } from "react-router";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faUnlock,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRegisterMutation } from "../store/api/authApiSlice";
-import { useNavigate } from "react-router";
+
 import styles from "../assets/styles/components/RegisterForm.module.scss";
 
 interface ErrorType {

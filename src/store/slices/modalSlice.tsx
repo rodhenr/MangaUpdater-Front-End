@@ -64,8 +64,6 @@ export const modalSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { addModalData, changeState, clearModalData, setMangaId } =
   modalSlice.actions;
-
 export default modalSlice.reducer;

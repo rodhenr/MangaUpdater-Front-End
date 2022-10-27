@@ -1,8 +1,9 @@
+import { Routes, Route } from "react-router-dom";
+
 import { Index as Home } from "./pages/Home/Index";
 import { Index as Search } from "./pages/Search/Index";
 import { Index as Login } from "./pages/Login/Index";
 import { Index as Register } from "./pages/Register/Index";
-import { Routes, Route } from "react-router-dom";
 import HasToken from "./layouts/Auth/HasToken";
 import CheckToken from "./layouts/Auth/CheckToken";
 

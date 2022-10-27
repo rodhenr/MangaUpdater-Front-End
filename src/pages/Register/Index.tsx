@@ -1,6 +1,7 @@
 import RegisterForm from "../../components/RegisterForm";
-import styles from "../../assets/styles/pages/Register.module.scss";
 import AuthHeader from "../../components/AuthHeader";
+
+import styles from "../../assets/styles/pages/Register.module.scss";
 
 export function Index() {
   return (

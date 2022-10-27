@@ -1,15 +1,19 @@
 import { useEffect } from "react";
-import type { RootState } from "../store/store";
+
 import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 import { addSearchData } from "../store/slices/searchSlice";
-import { checkName } from "../utils/nameCheck";
-import styles from "../assets/styles/components/MainSearch.module.scss";
 import {
   changeState,
   setMangaId,
   clearModalData,
 } from "../store/slices/modalSlice";
+
 import { useSearchMangasQuery } from "../store/api/searchApiSlice";
+
+import { checkName } from "../utils/nameCheck";
+
+import styles from "../assets/styles/components/MainSearch.module.scss";
 
 export default function MainSearch() {
   const dispatch = useDispatch();
@@ -34,6 +38,7 @@ export default function MainSearch() {
     dispatch(changeState(false));
     dispatch(clearModalData());
     dispatch(setMangaId(""));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openModal = (mangaId: string) => {
@@ -51,7 +56,7 @@ export default function MainSearch() {
         >
           <img src={i.image} alt={i.name} />
           <div className={styles.name}>
-            <p>{checkName(i.name, 21)}</p>
+            <p>{checkName(i.name, 22)}</p>
           </div>
         </div>
       ))}

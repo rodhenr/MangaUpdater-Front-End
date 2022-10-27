@@ -8,13 +8,14 @@ Para este projeto foram utilizadas as seguintes tecnologias:
 
 **FRONT-END**
 
-- [Axios](https://axios-http.com/ptbr/docs/intro)
 - [React](https://pt-br.reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [SASS](https://sass-lang.com/)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
 - [UUID](https://www.uuidgenerator.net/)
-- [React Router]()
-- [Redux Toolkit]()
+- [Font Awesome](https://fontawesome.com/search?q=user&o=r)
+- [React Router](https://v5.reactrouter.com/web/guides/quick-start)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
 
 **BACK-END**
 
@@ -41,7 +42,7 @@ Para replicar esse projeto no seu computador siga os passos abaixo:
 
 ### Back-End
 
-- Você deve fazer o download/clone [deste]() repositório e o abrir na sua IDE.
+- Você deve fazer o download/clone [deste](https://github.com/rodhenr/MangaUpdater-Back-End) repositório e o abrir na sua IDE.
 
 ```
 1. Execute o comando npm i para instalar as dependências do projeto

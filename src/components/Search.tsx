@@ -1,15 +1,19 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { changeSearch } from "../store/slices/searchSlice";
-import styles from "../assets/styles/components/Search.module.scss";
 import {
   changeState,
   clearModalData,
   setMangaId,
 } from "../store/slices/modalSlice";
+
+import { useNavigate } from "react-router";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
+import styles from "../assets/styles/components/Search.module.scss";
 
 export function Search() {
   const navigate = useNavigate();

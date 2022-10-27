@@ -1,11 +1,15 @@
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import profileImage from "../../assets/images/profile-image.jpg";
-import { useNavigate } from "react-router";
-import headerImage from "../../assets/images/header-image.jpg";
-import type { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 import { removeToken } from "../../store/slices/authSlice";
+
+import { useNavigate } from "react-router";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+import profileImage from "../../assets/images/profile-image.jpg";
+import headerImage from "../../assets/images/header-image.jpg";
+
 import styles from "../../assets/styles/layouts/Header.module.scss";
 
 export function Index() {

@@ -1,18 +1,21 @@
-import type { RootState } from "../store/store";
-import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 import {
   addModalData,
   changeState,
   clearModalData,
   setMangaId,
 } from "../store/slices/modalSlice";
+
 import { useGetModalMangaQuery } from "../store/api/modalApiSlice";
 import {
   useFollowNewMangaMutation,
   useChangeFollowMutation,
   useDeleteFollowMutation,
 } from "../store/api/followApiSlice";
+
 import styles from "../assets/styles/components/Modal.module.scss";
 
 export default function Modal() {

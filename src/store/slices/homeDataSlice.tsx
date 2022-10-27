@@ -35,7 +35,5 @@ export const homeDataSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { addData, removeData } = homeDataSlice.actions;
-
 export default homeDataSlice.reducer;

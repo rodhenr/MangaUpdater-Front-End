@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { faUnlock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLoginMutation } from "../store/api/authApiSlice";
-import { useNavigate } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { addToken } from "../store/slices/authSlice";
+
+import { useLoginMutation } from "../store/api/authApiSlice";
+
+import { useNavigate } from "react-router";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUnlock, faUser } from "@fortawesome/free-solid-svg-icons";
+
 import styles from "../assets/styles/components/LoginForm.module.scss";
 
 interface ErrorType {

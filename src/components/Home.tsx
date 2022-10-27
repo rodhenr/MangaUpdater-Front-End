@@ -1,17 +1,21 @@
 import { useEffect } from "react";
-import type { RootState } from "../store/store";
+
 import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 import { addData } from "../store/slices/homeDataSlice";
-import { checkDate } from "../utils/dateCheck";
-import { checkName } from "../utils/nameCheck";
 import { addSearchData, changeSearch } from "../store/slices/searchSlice";
 import {
   changeState,
   setMangaId,
   clearModalData,
 } from "../store/slices/modalSlice";
-import styles from "../assets/styles/components/Home.module.scss";
+
 import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
+
+import { checkDate } from "../utils/dateCheck";
+import { checkName } from "../utils/nameCheck";
+
+import styles from "../assets/styles/components/Home.module.scss";
 
 export default function Home() {
   const { data, isSuccess, isError, isLoading } = useGetMangasQuery(undefined, {
@@ -28,6 +32,7 @@ export default function Home() {
     } else {
       dispatch(addData(data));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
@@ -38,6 +43,7 @@ export default function Home() {
     dispatch(changeState(false));
     dispatch(clearModalData());
     dispatch(setMangaId(""));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openModal = (mangaId: string) => {
@@ -53,11 +59,11 @@ export default function Home() {
         if (index > 0) last = checkDate(mangaData[index - 1].sources[0].date);
 
         return (
-          <div className={styles.container_manga}>
+          <div className={styles.container_manga} key={i.mangaID}>
             {(last !== "" || index === 0) && check !== last ? (
               <p className={styles.check}>{check}</p>
             ) : null}
-            <div className={styles.container_chapter} key={index}>
+            <div className={styles.container_chapter}>
               <div
                 className={styles.chapter}
                 onClick={() => openModal(i.mangaID)}
@@ -66,7 +72,9 @@ export default function Home() {
                 <p className={styles.mangaName}>{checkName(i.name, 45)}</p>
                 <div className={styles.chapter_info}>
                   <p>Capítulo: {i.sources[0].chapter}</p>
-                  <p className={styles.scan}>Scan: {checkName(i.sources[0].scanlator, 15)}</p>
+                  <p className={styles.scan}>
+                    Scan: {checkName(i.sources[0].scanlator, 15)}
+                  </p>
                 </div>
               </div>
             </div>
