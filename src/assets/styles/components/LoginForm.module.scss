@@ -6,14 +6,6 @@
   height: 400px;
   justify-content: center;
   width: 300px;
-  
-  a {
-    color: #ef233c;
-    text-decoration: none;
-
-    &:visited {
-    }
-  }
 }
 
 .login_text {
@@ -27,6 +19,13 @@
     text-align: center;
     width: 100%;
   }
+}
+
+.err {
+  color: #ff0b03;
+  font-size: 1.2rem;
+  margin: 0;
+  text-align: center;
 }
 
 .form {
@@ -58,6 +57,7 @@
   input {
     background-color: transparent;
     border: none;
+    box-sizing: border-box;
     color: rgba(0, 0, 0, 0.7);
     height: 22px;
     padding-left: 2.2rem;
@@ -72,7 +72,7 @@
     }
 
     &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0px 1000px white inset;
+      -webkit-box-shadow: 0 0 0px 1000px #fff inset;
     }
   }
 

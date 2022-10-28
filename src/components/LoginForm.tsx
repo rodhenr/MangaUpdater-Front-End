@@ -20,6 +20,7 @@ interface ErrorType {
 }
 
 export default function LoginForm() {
+  const [errMsg, setErrMsg] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -36,9 +37,11 @@ export default function LoginForm() {
     } catch (err) {
       const error = err as ErrorType;
       if (error.originalStatus === 500) {
-        alert("Servidor com erro... Tente novamente.");
+        setErrMsg("Erro no servidor");
       } else if (error.originalStatus === 401) {
-        alert("Usuário ou senha inválido!");
+        setErrMsg("Usuário e/ou senha inválido(s)");
+      } else if (error.originalStatus === 400) {
+        setErrMsg("Dados incompletos");
       }
     }
   };
@@ -56,6 +59,7 @@ export default function LoginForm() {
       <div className={styles.login_text}>
         <p>ENTRAR</p>
       </div>
+      {errMsg !== "" && <p className={styles.err}>{errMsg}</p>}
       <form className={styles.form}>
         <div className={`${styles.form_input} ${styles.input_first}`}>
           <FontAwesomeIcon icon={faUser} />

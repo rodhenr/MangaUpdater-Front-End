@@ -7,6 +7,7 @@ export interface Sources {
   date: Date;
   scanlator: string;
   follow: boolean;
+  sourceName: string;
 }
 
 export interface DataModal {

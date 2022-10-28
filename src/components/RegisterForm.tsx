@@ -21,6 +21,8 @@ interface ErrorType {
 }
 
 export default function RegisterForm() {
+  const [errMsg, setErrMsg] = useState("");
+  const [cPassword, setCPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -30,15 +32,20 @@ export default function RegisterForm() {
   const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    if (password !== cPassword) {
+      setErrMsg("As senhas não coincidem");
+      return;
+    }
+
     try {
       await trigger({ email, password, user }).unwrap();
       navigate("/");
     } catch (err) {
       const error = err as ErrorType;
       if (error.originalStatus === 500) {
-        alert("Servidor com erro... Tente novamente.");
+        setErrMsg("Erro no servidor");
       } else if (error.originalStatus === 400) {
-        alert("Dados inválidos!");
+        setErrMsg("Dados incompletos");
       }
     }
   };
@@ -48,6 +55,8 @@ export default function RegisterForm() {
       setEmail(e.target.value);
     } else if (e.target.id === "password") {
       setPassword(e.target.value);
+    } else if (e.target.id === "cPassword") {
+      setCPassword(e.target.value);
     } else {
       setUser(e.target.value);
     }
@@ -58,6 +67,7 @@ export default function RegisterForm() {
       <div className={styles.register_text}>
         <p>Registre-se</p>
       </div>
+      {errMsg !== "" && <p className={styles.err}>{errMsg}</p>}
       <form className={styles.form}>
         <div className={styles.form_input}>
           <FontAwesomeIcon icon={faUser} />
@@ -86,6 +96,16 @@ export default function RegisterForm() {
             placeholder="Senha"
             id="password"
             value={password}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className={styles.form_input}>
+          <FontAwesomeIcon icon={faUnlock} />
+          <input
+            type="password"
+            placeholder="Repita a senha"
+            id="cPassword"
+            value={cPassword}
             onChange={(e) => handleChange(e)}
           />
         </div>

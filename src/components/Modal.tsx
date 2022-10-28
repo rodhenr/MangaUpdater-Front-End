@@ -66,7 +66,7 @@ export default function Modal() {
 
   const handleCloseModal = (e: React.MouseEvent) => {
     const targetClass = (e.target as Element).className;
-    
+
     if (
       targetClass.includes("Modal_container") ||
       targetClass.includes("Modal_close")
@@ -90,7 +90,7 @@ export default function Modal() {
         <img src={modalData.image} alt={modalData.name} />
         <h1>{modalData.name}</h1>
         <div className={styles.author}>
-          <span>Autor:</span> <span>{modalData.author}</span>
+          <span>Autor: </span> <span>{modalData.author}</span>
         </div>
         <div className={styles.genres}>
           <span>Gêneros: </span>
@@ -116,7 +116,7 @@ export default function Modal() {
               }
             >
               <p className={styles.last_chapter}>Capítulo {i.chapter}</p>
-              <p className={styles.source}>MangaUpdates</p>
+              <p className={styles.source}>{i.sourceName}</p>
             </div>
           ))}
         </div>
