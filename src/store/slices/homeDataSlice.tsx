@@ -1,24 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Data } from "../api/homeDataApiSlice";
 
-interface Sources {
-  sourceID: string;
-  pathID: string;
-  chapter: string;
-  date: Date;
-  scanlator: string;
-}
-export interface Data {
-  image: string;
-  name: string;
-  mangaID: string;
-  sources: Sources[];
-}
-
-export interface Home {
+interface HomeData {
   data: Data[];
 }
 
-const initialState: Home = {
+const initialState: HomeData = {
   data: [],
 };
 

@@ -5,7 +5,7 @@
   height: 100%;
   justify-content: center;
   left: 0;
-  position: absolute;
+  position: fixed;
   right: 0;
   width: 100vw;
   z-index: 100;
@@ -44,6 +44,24 @@
     color: #fca311;
     font-size: 1.2rem;
   }
+
+  @media (min-width: 1024px) {
+    grid-template-areas: "img title" "img author" "img genres" "img ch" "img follow";
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: 100px 25px 25px 200px 50px;
+    height: 400px;
+    width: 600px;
+
+    img {
+      height: 100%;
+      grid-area: img;
+      width: 250px;
+    }
+
+    h1 {
+      grid-area: title;
+    }
+  }
 }
 
 .author,
@@ -59,6 +77,18 @@
       font-size: 0.9 rem;
       font-weight: 700;
     }
+  }
+}
+
+.author {
+  @media (min-width: 1024px) {
+    grid-area: author;
+  }
+}
+
+.genres {
+  @media (min-width: 1024px) {
+    grid-area: genres;
   }
 }
 
@@ -88,16 +118,24 @@
 
 .followingB {
   background-color: #d91414;
+
+  @media (min-width: 1024px) {
+    grid-area: follow;
+  }
 }
 
 .sources {
   align-items: center;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-columns: repeat(auto-fit, 130px);
   justify-content: center;
   justify-self: flex-start;
   margin-left: 0.5rem;
   width: calc(100% - 0.5rem);
+
+  @media (min-width: 1024px) {
+    grid-area: ch;
+  }
 }
 
 .source_item {
@@ -109,7 +147,7 @@
   flex-direction: column;
   height: 35px;
   justify-content: center;
-  width: 85px;
+  width: 120px;
 }
 
 .last_chapter {

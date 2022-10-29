@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
@@ -14,10 +14,33 @@ import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
 
 import { checkDate } from "../utils/dateCheck";
 import { checkName } from "../utils/nameCheck";
+import { orderArray } from "../utils/orderArray";
 
 import styles from "../assets/styles/components/Home.module.scss";
 
+interface Sources {
+  sourceID: string;
+  pathID: string;
+  chapter: string;
+  date: Date;
+  scanlator: string;
+}
+
+export interface Data {
+  image: string;
+  name: string;
+  mangaID: string;
+  sources: Sources[];
+  date: string;
+}
+
+interface IMangaState {
+  data: Data[];
+  date: string;
+}
+
 export default function Home() {
+  const [mData, setMData] = useState<IMangaState[] | []>([]);
   const { data, isSuccess, isError, isLoading } = useGetMangasQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
@@ -29,8 +52,11 @@ export default function Home() {
   useEffect(() => {
     if (data === undefined || data === null) {
       dispatch(addData([]));
+      setMData([]);
     } else {
       dispatch(addData(data));
+      const arr = orderArray(data);
+      setMData(arr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -51,10 +77,61 @@ export default function Home() {
     dispatch(changeState(true));
   };
 
-  return isSuccess && (mangaData.length > 0 || modalOpen === true) ? (
+  return isSuccess &&
+    (mangaData.length > 0 || modalOpen === true) &&
+    mData.length > 0 ? (
     <div className={styles.container}>
-      {mangaData.map((i, index) => {
+      {mData.map((i, index) => {
+        return (
+          <div className={styles.container_manga} key={index}>
+            <p className={styles.check}>{i.date}</p>
+            <div className={styles.manga_list}>
+              {i.data.map((j) => {
+                return (
+                  <div className={styles.container_chapter}>
+                    <div
+                      className={styles.chapter}
+                      onClick={() => openModal(j.mangaID)}
+                    >
+                      <img src={j.image} alt="manga_image" />
+                      <p className={styles.mangaName}>
+                        {checkName(j.name, 45)}
+                      </p>
+                      <div className={styles.chapter_info}>
+                        <p>Capítulo: {j.sources[0].chapter}</p>
+                        <p className={styles.scan}>
+                          Scan: {checkName(j.sources[0].scanlator, 15)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : isError ? (
+    <div className={styles.err}>
+      <p>Ocorreu um problema...</p>
+    </div>
+  ) : isLoading ? (
+    <div className={styles.loading}>
+      <p>Carregando...</p>
+    </div>
+  ) : (
+    <div className={styles.noresult}>
+      <p>Você não está seguindo nenhum mangá</p>
+    </div>
+  );
+}
+
+/*
+
+{mangaData.map((i, index) => {
         let last = "";
+
         const check = checkDate(i.sources[0].date);
         if (index > 0) last = checkDate(mangaData[index - 1].sources[0].date);
 
@@ -81,18 +158,5 @@ export default function Home() {
           </div>
         );
       })}
-    </div>
-  ) : isError ? (
-    <div className={styles.err}>
-      <p>Ocorreu um problema...</p>
-    </div>
-  ) : isLoading ? (
-    <div className={styles.loading}>
-      <p>Carregando...</p>
-    </div>
-  ) : (
-    <div className={styles.noresult}>
-      <p>Você não está seguindo nenhum mangá</p>
-    </div>
-  );
-}
+
+*/

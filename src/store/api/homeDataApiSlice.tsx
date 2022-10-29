@@ -1,22 +1,23 @@
 import { apiSlice } from "./apiSlice";
 
-interface MangaData {
+interface Sources {
+  sourceID: string;
+  pathID: string;
+  chapter: string;
+  date: Date;
+  scanlator: string;
+}
+
+export interface Data {
   image: string;
   name: string;
-  author: string;
-  genres: string;
-  sources: {
-    sourceID: string;
-    pathID: string;
-    chapter: string;
-    date: Date;
-    scanlator: string;
-  };
+  mangaID: string;
+  sources: Sources[];
 }
 
 export const homeDataApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMangas: builder.query<MangaData, void>({
+    getMangas: builder.query<Data[], void>({
       query: () => ({
         url: "/api/manga",
         method: "GET",
