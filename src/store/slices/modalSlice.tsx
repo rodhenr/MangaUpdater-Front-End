@@ -15,6 +15,7 @@ export interface DataModal {
   id: string;
   image: string;
   name: string;
+  alternativeNames: string[],
   author: string;
   genres: string[];
   sources: Sources[];
@@ -33,6 +34,7 @@ const initialState: InitialState = {
     id: "",
     image: "",
     name: "",
+    alternativeNames: [],
     author: "",
     genres: [],
     sources: [],
@@ -57,6 +59,7 @@ export const modalSlice = createSlice({
         id: "",
         image: "",
         name: "",
+        alternativeNames: [],
         author: "",
         genres: [],
         sources: [],

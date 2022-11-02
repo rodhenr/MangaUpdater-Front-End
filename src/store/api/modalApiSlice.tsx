@@ -14,6 +14,7 @@ export interface DataModal {
   id: string;
   image: string;
   name: string;
+  alternativeNames: string[],
   genres: string[];
   author: string;
   sources: Sources[];

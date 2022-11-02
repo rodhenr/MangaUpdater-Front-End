@@ -89,6 +89,16 @@ export default function Modal() {
         </div>
         <img src={modalData.image} alt={modalData.name} />
         <h1>{modalData.name}</h1>
+        <div className={styles.alternative}>
+          <span className={styles.alternative_title}>Outros nomes: </span>
+          {modalData.alternativeNames.map((i, index) => {
+            if (modalData.alternativeNames.length === index + 1) {
+              return <span>{i}</span>;
+            } else {
+              return <span>{i}, </span>;
+            }
+          })}
+        </div>
         <div className={styles.author}>
           <span>Autor: </span> <span>{modalData.author}</span>
         </div>
