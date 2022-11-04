@@ -1,4 +1,7 @@
 .container {
+  background-image: url("../../images/header-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -7,34 +10,13 @@
   height: 140px;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  position: relative;
 
   .user_image {
     align-self: flex-start;
     border: 2px solid #fff;
     border-radius: 50%;
-    height: 50px;
-  }
-
-  .header_image {
-    height: 100%;
-    left: 0;
-    opacity: 0.25;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-  }
-
-  h1 {
-    color: #fff;
     cursor: pointer;
-    font-size: 2.2rem;
-    margin: 0;
-    text-align: center;
-    text-shadow: 3px 0 #000, -3px 0 #000, 0 3px #000, 0 -3px #000, 2px 2px #000,
-      -2px -2px #000, 2px -2px #000, -2px 2px #000;
+    height: 50px;
   }
 
   svg {
@@ -56,6 +38,72 @@
     svg {
       font-size: 1.7rem;
     }
+  }
+}
+
+.image_modal {
+  background-color: #dedede;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 22px 30px 4px;
+  display: grid;
+  font-family: "Montserrat", sans-serif;
+  grid-template-rows: 40px 1fr 50px;
+  height: 200px;
+  left: 50%;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100000;
+
+  p {
+    margin: 0;
+  }
+}
+
+.modal_title {
+  align-items: center;
+  background-color: #ef233c;
+  color: #fff;
+  display: flex;
+  font-size: 1.2rem;
+  height: 40px;
+  justify-content: center;
+}
+
+.modal_input {
+  align-items: center;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+}
+
+.modal_button {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  button {
+    background-color: #ef233c;
+    border: none;
+    color: #fff;
+    height: 30px;
+    width: 130px;
+  }
+}
+
+.site_title {
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    color: #fff;
+    cursor: pointer;
+    display: inline;
+    font-size: 2.2rem;
+    margin: 0;
+    text-align: center;
+    text-shadow: 3px 0 #000, -3px 0 #000, 0 3px #000, 0 -3px #000, 2px 2px #000,
+      -2px -2px #000, 2px -2px #000, -2px 2px #000;
   }
 }
 
