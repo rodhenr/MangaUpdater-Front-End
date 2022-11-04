@@ -59,7 +59,7 @@ export default function LoginForm() {
       <div className={styles.login_text}>
         <p>ENTRAR</p>
       </div>
-      {errMsg !== "" && <p className={styles.err}>{errMsg}</p>}
+      {<p className={styles.err}>{errMsg}</p>}
       <form className={styles.form}>
         <div className={`${styles.form_input} ${styles.input_first}`}>
           <FontAwesomeIcon icon={faUser} />

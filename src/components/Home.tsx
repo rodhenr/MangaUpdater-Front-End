@@ -88,7 +88,7 @@ export default function Home() {
             <div className={styles.manga_list}>
               {i.data.map((j) => {
                 return (
-                  <div className={styles.container_chapter}>
+                  <div className={styles.container_chapter} key={j.mangaID}>
                     <div
                       className={styles.chapter}
                       onClick={() => openModal(j.mangaID)}

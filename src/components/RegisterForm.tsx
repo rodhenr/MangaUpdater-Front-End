@@ -65,9 +65,9 @@ export default function RegisterForm() {
   return (
     <div className={styles.container}>
       <div className={styles.register_text}>
-        <p>Registre-se</p>
+        <p>REGISTRE-SE</p>
       </div>
-      {errMsg !== "" && <p className={styles.err}>{errMsg}</p>}
+      {<p className={styles.err}>{errMsg}</p>}
       <form className={styles.form}>
         <div className={styles.form_input}>
           <FontAwesomeIcon icon={faUser} />

@@ -11,4 +11,9 @@
   justify-content: center;
   overflow: hidden;
   width: 100vw;
+
+  @media (min-width: 728px) {
+    background-color: rgb(187, 187, 187);
+    background-image: none;
+  }
 }
