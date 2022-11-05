@@ -22,8 +22,13 @@ Para este projeto foram utilizadas as seguintes tecnologias:
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
 - [Mongoose](https://mongoosejs.com/docs/queries.html)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
 - [Cors](https://www.npmjs.com/package/cors)
 - [UUID](https://www.npmjs.com/package/uuid)
+- [JWT](https://jwt.io/)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Cheerio](https://www.npmjs.com/package/cheerio)
 
 ## :dvd: Como replicar este projeto
 
