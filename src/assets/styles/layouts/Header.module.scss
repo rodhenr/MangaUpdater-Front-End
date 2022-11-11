@@ -17,6 +17,7 @@
     border-radius: 50%;
     cursor: pointer;
     height: 50px;
+    width: 50px;
   }
 
   svg {
@@ -29,6 +30,7 @@
   @media (min-width: 1024px) {
     .user_image {
       height: 70px;
+      width: 70px;
     }
 
     h1 {
@@ -86,8 +88,13 @@
     background-color: #ef233c;
     border: none;
     color: #fff;
+    cursor: pointer;
     height: 30px;
     width: 130px;
+
+    &:hover {
+      background-color: #bf1d30;
+    }
   }
 }
 
@@ -127,5 +134,24 @@
     p {
       font-size: 1.5rem;
     }
+  }
+}
+
+.modal_close {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  color: #ef233c;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  width: 20px;
+
+  &:hover {
+    background-color: rgb(219, 219, 219);
   }
 }

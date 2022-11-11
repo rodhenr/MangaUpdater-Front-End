@@ -4,11 +4,13 @@ import { RootState } from "../store";
 interface Data {
   token: string;
   user: string;
+  userAvatar: string;
 }
 
 const initialState: Data = {
   token: "",
   user: "",
+  userAvatar: "",
 };
 
 export const tokenSlice = createSlice({
@@ -16,13 +18,15 @@ export const tokenSlice = createSlice({
   initialState,
   reducers: {
     addToken: (state, action) => {
-      const { accessToken, user } = action.payload;
+      const { accessToken, user, userAvatar } = action.payload;
       state.token = accessToken;
       state.user = user;
+      state.userAvatar = userAvatar;
     },
     removeToken: (state) => {
       state.token = "";
       state.user = "";
+      state.userAvatar = "";
     },
   },
 });

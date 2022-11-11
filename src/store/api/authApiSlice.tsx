@@ -14,6 +14,7 @@ interface RegisterData {
 interface TokenData {
   accessToken: string;
   user: string;
+  userAvatar: string;
 }
 
 export const authApiSlice = apiSlice.injectEndpoints({
