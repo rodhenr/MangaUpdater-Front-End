@@ -16,6 +16,8 @@ import { useUploadAvatarMutation } from "../../store/api/userApiSlice";
 export function Index() {
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [msg, setMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [uploadAvatar] = useUploadAvatarMutation();
@@ -28,6 +30,8 @@ export function Index() {
   };
 
   const handleOpenModal = () => {
+    setErrMsg("");
+    setMsg("");
     setOpen(!open);
   };
 
@@ -35,6 +39,8 @@ export function Index() {
     if (!e.target.files) return;
     const file = e.target.files[0];
 
+    setErrMsg("");
+    setMsg("");
     setSelectedFile(file);
   };
 
@@ -46,9 +52,10 @@ export function Index() {
     try {
       const form = new FormData();
       form.append("file", selectedFile);
-      await uploadAvatar(form);
+      const upload = await uploadAvatar(form).unwrap();
+      setMsg(upload);
     } catch (err) {
-      console.log(err);
+      setErrMsg("Houve um problema no seu upload...");
     }
   };
 
@@ -92,8 +99,22 @@ export function Index() {
                 onChange={(e) => handleFileChange(e)}
               />
             </div>
+            <div className={styles.upload_msg_container}>
+              {msg !== "" ? (
+                <p className={styles.upload_msg}>{msg}</p>
+              ) : errMsg !== "" ? (
+                <p className={styles.upload_errMsg}>{errMsg}</p>
+              ) : (
+                <p></p>
+              )}
+            </div>
             <div className={styles.modal_button}>
-              <button onClick={(e) => handleSubmit(e)}>ENVIAR</button>
+              <button
+                disabled={msg !== "" ? true : errMsg !== "" ? true : false}
+                onClick={(e) => handleSubmit(e)}
+              >
+                ENVIAR
+              </button>
             </div>
           </form>
         </div>

@@ -12,11 +12,12 @@ import {
 
 import { useGetMangasQuery } from "../store/api/homeDataApiSlice";
 
-import { checkDate } from "../utils/dateCheck";
 import { checkName } from "../utils/nameCheck";
 import { orderArray } from "../utils/orderArray";
 
 import styles from "../assets/styles/components/Home.module.scss";
+import { useGetAvatarQuery } from "../store/api/userApiSlice";
+import { changeUserAvatar } from "../store/slices/authSlice";
 
 interface Sources {
   sourceID: string;
@@ -44,6 +45,9 @@ export default function Home() {
   const { data, isSuccess, isError, isLoading } = useGetMangasQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+  const { data: DataAvatar } = useGetAvatarQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const dispatch = useDispatch();
   const mangaData = useSelector((state: RootState) => state.homeData.data);
@@ -60,6 +64,14 @@ export default function Home() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  useEffect(() => {
+    if (DataAvatar === undefined || DataAvatar === null) {
+    } else {
+      console.log(DataAvatar);
+      dispatch(changeUserAvatar(DataAvatar));
+    }
+  }, [DataAvatar]);
 
   useEffect(() => {
     dispatch(addSearchData([]));

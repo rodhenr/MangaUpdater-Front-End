@@ -44,11 +44,11 @@
 }
 
 .image_modal {
-  background-color: #dedede;
+  background-color: #ececec;
   box-shadow: rgba(0, 0, 0, 0.7) 0px 22px 30px 4px;
   display: grid;
   font-family: "Montserrat", sans-serif;
-  grid-template-rows: 40px 1fr 50px;
+  grid-template-rows: 40px 1fr 50px 50px;
   height: 200px;
   left: 50%;
   width: 400px;
@@ -95,6 +95,11 @@
     &:hover {
       background-color: #bf1d30;
     }
+
+    &:disabled {
+      background-color: #575757;
+      cursor: auto;
+    }
   }
 }
 
@@ -130,6 +135,14 @@
     margin: 0;
   }
 
+  img {
+    z-index: 100;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
   @media (min-width: 1024px) {
     p {
       font-size: 1.5rem;
@@ -154,4 +167,24 @@
   &:hover {
     background-color: rgb(219, 219, 219);
   }
+}
+
+.upload_msg_container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.upload_msg {
+  color: rgb(15, 182, 40);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.upload_errMsg {
+  color: rgb(205, 4, 4);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
 }

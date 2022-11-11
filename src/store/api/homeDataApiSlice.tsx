@@ -22,7 +22,7 @@ export const homeDataApiSlice = apiSlice.injectEndpoints({
         url: "/api/manga",
         method: "GET",
       }),
-      providesTags: ["Data"],
+      providesTags: ["Data", "User"],
     }),
   }),
 });
