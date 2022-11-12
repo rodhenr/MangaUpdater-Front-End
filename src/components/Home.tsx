@@ -68,7 +68,6 @@ export default function Home() {
   useEffect(() => {
     if (DataAvatar === undefined || DataAvatar === null) {
     } else {
-      console.log(DataAvatar);
       dispatch(changeUserAvatar(DataAvatar));
     }
   }, [DataAvatar]);

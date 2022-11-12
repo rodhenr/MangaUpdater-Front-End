@@ -1,19 +1,10 @@
 .container {
   align-items: center;
-  background-color: #fff;
-  background-image: url("../../images/bg.png");
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: 200%;
+  background-color: #1b263b;
   box-sizing: border-box;
   display: flex;
   height: 100vh;
   justify-content: center;
   overflow: hidden;
   width: 100vw;
-
-  @media (min-width: 728px) {
-    background-color: rgb(187, 187, 187);
-    background-image: none;
-  }
 }
