@@ -92,9 +92,9 @@ export default function Home() {
     (mangaData.length > 0 || modalOpen === true) &&
     mData.length > 0 ? (
     <div className={styles.container}>
-      {mData.map((i, index) => {
+      {mData.map((i) => {
         return (
-          <div className={styles.container_manga} key={index}>
+          <div className={styles.container_manga} key={i.data[0].mangaID}>
             <p className={styles.check}>{i.date}</p>
             <div className={styles.manga_list}>
               {i.data.map((j) => {
@@ -137,37 +137,3 @@ export default function Home() {
     </div>
   );
 }
-
-/*
-
-{mangaData.map((i, index) => {
-        let last = "";
-
-        const check = checkDate(i.sources[0].date);
-        if (index > 0) last = checkDate(mangaData[index - 1].sources[0].date);
-
-        return (
-          <div className={styles.container_manga} key={i.mangaID}>
-            {(last !== "" || index === 0) && check !== last ? (
-              <p className={styles.check}>{check}</p>
-            ) : null}
-            <div className={styles.container_chapter}>
-              <div
-                className={styles.chapter}
-                onClick={() => openModal(i.mangaID)}
-              >
-                <img src={i.image} alt="manga_image" />
-                <p className={styles.mangaName}>{checkName(i.name, 45)}</p>
-                <div className={styles.chapter_info}>
-                  <p>Capítulo: {i.sources[0].chapter}</p>
-                  <p className={styles.scan}>
-                    Scan: {checkName(i.sources[0].scanlator, 15)}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-
-*/

@@ -93,9 +93,9 @@ export default function Modal() {
           <span className={styles.alternative_title}>Outros nomes: </span>
           {modalData.alternativeNames.map((i, index) => {
             if (modalData.alternativeNames.length === index + 1) {
-              return <span>{i}</span>;
+              return <span key={i}>{i}</span>;
             } else {
-              return <span>{i}, </span>;
+              return <span key={i}>{i}, </span>;
             }
           })}
         </div>
@@ -106,9 +106,9 @@ export default function Modal() {
           <span>Gêneros: </span>
           {modalData.genres.map((j, index) => {
             if (index + 1 !== modalData.genres.length) {
-              return <span key={index}>{j}, </span>;
+              return <span key={j}>{j}, </span>;
             } else {
-              return <span key={index}>{j}</span>;
+              return <span key={j}>{j}</span>;
             }
           })}
         </div>
